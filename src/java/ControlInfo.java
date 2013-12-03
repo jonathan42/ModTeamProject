@@ -22,6 +22,11 @@ import org.primefaces.event.SelectEvent;
 public class ControlInfo implements Serializable{
     
     
+    private String Integrator1V;
+    private String Integrator2V;
+    private String TypeIntegratorV;
+    private String IntegratorV;
+    
     private List<String> Integrator1;
     private List<String> Integrator2;
     private List<String> TypeIntegrator;
@@ -29,8 +34,11 @@ public class ControlInfo implements Serializable{
 
     
     //
-    private HashMap<String, Integer> Parameters ;
-    private HashMap<String, Integer> variables ;
+    private List<Parameter> Parameters ;
+    
+    
+    private List<String> variablesName ;
+    private List<Integer> variablesValues ;
     
     public ControlInfo() {
         
@@ -51,18 +59,32 @@ public class ControlInfo implements Serializable{
          TypeIntegrator.add("Continu");
          
          
-         Parameters = new HashMap<String, Integer>();
-         Parameters.put("para1", 15);
-         Parameters.put("para2", 14);
-         Parameters.put("para3", 150);
+         Parameters = new ArrayList<Parameter>();
+         Parameters.add(new Parameter("para", 10));
+         Parameters.add(new Parameter("para2", 110));
+         Parameters.add(new Parameter("para3", 120));
          
-         variables = new HashMap<String, Integer>();
+ 
+         
+         /*variables = new ArrayList<String>();
          variables.put("Var1", 10);
          variables.put("Var2", 1);
-         variables.put("Var3", 100);
+         variables.put("Var3", 100);*/
                
     }
 
+    public void addParameter(){
+        
+         Parameters.add(new Parameter("para5", 105));
+       
+    }
+    
+    public void delParameter(Object o){
+        boolean val;
+        val=Parameters.remove(o);
+    }
+    
+    
      public void SelectedType(SelectEvent event ) {  
          
          if (event.getObject().toString().equalsIgnoreCase("Discret") ){
@@ -106,21 +128,67 @@ public class ControlInfo implements Serializable{
         this.TypeIntegrator = TypeIntegrator;
     }
 
-    public HashMap<String, Integer> getParameters() {
+
+
+    public List<String> getVariablesName() {
+        return variablesName;
+    }
+
+    public List<Integer> getVariablesValues() {
+        return variablesValues;
+    }
+
+  
+
+    public void setVariablesName(List<String> variablesName) {
+        this.variablesName = variablesName;
+    }
+
+    public void setVariablesValues(List<Integer> variablesValues) {
+        this.variablesValues = variablesValues;
+    }
+
+    //////////////////////////////////////
+    public List<Parameter> getParameters() {
         return Parameters;
     }
 
-    public HashMap<String, Integer> getVariables() {
-        return variables;
-    }
-
-    public void setParameters(HashMap<String, Integer> Parameters) {
+    public void setParameters(List<Parameter> Parameters) {
         this.Parameters = Parameters;
     }
 
-    public void setVariables(HashMap<String, Integer> variables) {
-        this.variables = variables;
+    public String getIntegrator1V() {
+        return Integrator1V;
     }
+
+    public String getIntegrator2V() {
+        return Integrator2V;
+    }
+
+    public String getTypeIntegratorV() {
+        return TypeIntegratorV;
+    }
+
+    public String getIntegratorV() {
+        return IntegratorV;
+    }
+
+    public void setIntegrator1V(String Integrator1V) {
+        this.Integrator1V = Integrator1V;
+    }
+
+    public void setIntegrator2V(String Integrator2V) {
+        this.Integrator2V = Integrator2V;
+    }
+
+    public void setTypeIntegratorV(String TypeIntegratorV) {
+        this.TypeIntegratorV = TypeIntegratorV;
+    }
+
+    public void setIntegratorV(String IntegratorV) {
+        this.IntegratorV = IntegratorV;
+    }
+    
     
     
     

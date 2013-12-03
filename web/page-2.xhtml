@@ -22,7 +22,7 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
-                    <center> Crée par l'équipe Mod-Team de l'entreprise virtuel Castle Tech pour l'INSERM (c) Made in Gphy </center>
+                    <center> Créé par l'équipe Mod-Team de l'entreprise virtuel Castle Tech pour l'INSERM (c) Made in Gphy </center>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="160" header="Menu" collapsible="true">
@@ -57,75 +57,76 @@
                
                 <p:layoutUnit position="center">
             
-                    <h:form>     
+                    <h:form id="formdesc">     
                         <p:growl id="grow2" sticky="true" showDetail="true"/>  
                           <p:panelGrid columns="2">
                               
                             <p:panel header="Node">
                                 <p:panelGrid columns="2">
                                     <h:outputText value="Name :" />  
-                                    <h:inputText value="#{mindmapBean.tmpNode.label}" id="Nom"/> 
+                                    <h:inputText value="test" id="Nom"/> 
                                     
                                     <h:outputText value="Description:" />  
-                                    <h:inputText value="#{mindmapBean.tmpNode.data}" id="Desc"/>  
+                                    <h:inputText value="test" id="Desc"/>  
                                    
                                     <h:outputText value="Father:" />  
-                                    <h:inputText value="#{mindmapBean.tmpNode.parent}" id="pere"/>  
+                                    <h:inputText value="test" id="pere"/>  
                                    
                                     <h:outputText value="Advenced Description :" />  
                                     <p:inputTextarea rows="5" cols="30"  maxlength="10"  id="DescADVENCED"     
-                                                     value="#{mindmapBean.tmpNode.data}" autoResize="false"/>
+                                                     value="test" autoResize="false"/>
                                     <h:outputText value="Type of integration: " /> 
                                     
                                  
-                                    <p:selectOneMenu value="#{ControlInfo.typeIntegrator}"  effect="fade"  >  
-                                        <f:selectItems value="#{ControlInfo.typeIntegrator}"  var="type" />    
+                                    <p:selectOneMenu value="#{ControlInfo.typeIntegratorV}" var="type" effect="fade"  >  
+                                        <f:selectItems value="#{ControlInfo.typeIntegrator}"  />    
                                     </p:selectOneMenu>
                                    
-                                    <c:if test="${type == Discret} " >
+                                  
                                     <h:outputText value="Integration: " id="Inte"/>  
-                                    <p:selectOneMenu value="#{ControlInfo.integrator1}" var="type2" effect="fade" >  
+                                    <p:selectOneMenu value="#{ControlInfo.integrator1V}" var="type2" effect="fade" >  
                                         <f:selectItems value="#{ControlInfo.integrator1}" /> 
+                                        
                                     </p:selectOneMenu>  
-                                    </c:if>
+                                   
                                     
-                                     <c:if test="${type == continu} " >
-                                    <h:outputText value="Integration: " id="Inte"/>  
-                                    <p:selectOneMenu value="#{ControlInfo.integrator2}" var="type2" effect="fade" >  
+                                    
+                                    <h:outputText value="Integration: " id="Inte2"/>  
+                                    <p:selectOneMenu value="#{ControlInfo.integrator2V}" var="type21" effect="fade" >  
                                         <f:selectItems value="#{ControlInfo.integrator2}" /> 
                                     </p:selectOneMenu>  
-                                    </c:if>
+                                   
                                     
                                 </p:panelGrid>
                             </p:panel>
                              
-                            <p:panel header="Desc parameter">
-                                <p:panelGrid columns="2">
+                              <p:panel header="Desc parameter" id="test">
+                                <p:panelGrid columns="2" >
                                     <h:outputText value="Parameter :" />  
-                                      <p:commandButton value="Add Parameter"   id="addparam" action="null"  ajax="false"/> 
-                                    <p:dataList value="#{ControlInfo.parameters}" var="para" itemType="disc">  
-                                        <h:outputText value="#{para.key}" />  
+                                    <p:commandButton value="Add Parameter"  update="ListPara" id="addparam" action="#{ControlInfo.addParameter}"  ajax="false"/> 
+                                      <p:dataList id="ListPara" value="#{ControlInfo.parameters}" var="para"  itemType="disc" >  
+                                        #{para.names} : 
                                         <h:inputText value="#{para.values}" id="Desc2"/>  
-                                        <p:commandButton value="X"   id="delparam" action="null"  ajax="false"/> 
+                                        <p:commandButton value="X"  update="ListPara" id="delparam" action="#{ControlInfo.delParameter(para)}"  ajax="false"/> 
                                     </p:dataList> 
                                     <br />
                                     <h:outputText value="State Variable:" />  
                                          <p:commandButton value="Add Variable"   id="addvaria" action="null"  ajax="false"/>
                                     <p:dataList value="param" var="car" itemType="disc">  
                                         <h:outputText value="Variable name:" />  
-                                        <h:inputText value="#{mindmapBean.tmpNode.data}" id="Variableetat"/> 
+                                        <h:inputText value="test" id="Variableetat"/> 
                                          <p:commandButton value="X"   id="delvaria" action="null"  ajax="false"/> 
                                     </p:dataList>   
                                    <br />
                                     <h:outputText value="Equation:" />
                                       <p:commandButton value="Test"   id="testequation" action="null"  ajax="false"/>
-                                    <h:inputText value="#{mindmapBean.tmpNode.parent}" id="equation"/>  
+                                    <h:inputText value="test" id="equation"/>  
                                   
                                      <br />
                                      
                                     <h:outputText value="Derivees :" />  
                                      <p:commandButton value="Test"   id="testderivee" action="null"  ajax="false"/>
-                                    <h:inputText value="#{mindmapBean.tmpNode.data}" id="deriver"/>  
+                                    <h:inputText value="test" id="deriver"/>  
                                    
                                  
                                     <br />
