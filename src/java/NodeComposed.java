@@ -27,4 +27,7 @@ public class NodeComposed {
     private String Equation;
     private String Derivates;
     
+    
+    //  parent fils root
+    //position GUI
 }

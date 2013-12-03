@@ -1,9 +1,11 @@
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
 
 /*
  * To change this template, choose Tools | Templates
@@ -23,7 +25,13 @@ public class ControlInfo implements Serializable{
     private List<String> Integrator1;
     private List<String> Integrator2;
     private List<String> TypeIntegrator;
+    private List<String> Integrator;
 
+    
+    //
+    private HashMap<String, Integer> Parameters ;
+    private HashMap<String, Integer> variables ;
+    
     public ControlInfo() {
         
          Integrator1 = new ArrayList<String>();
@@ -39,14 +47,31 @@ public class ControlInfo implements Serializable{
          
          
          TypeIntegrator = new ArrayList<String>();
-         TypeIntegrator.add("Dicret");
-         TypeIntegrator.add("continu");
+         TypeIntegrator.add("Discret");
+         TypeIntegrator.add("Continu");
          
          
+         Parameters = new HashMap<String, Integer>();
+         Parameters.put("para1", 15);
+         Parameters.put("para2", 14);
+         Parameters.put("para3", 150);
          
-         
+         variables = new HashMap<String, Integer>();
+         variables.put("Var1", 10);
+         variables.put("Var2", 1);
+         variables.put("Var3", 100);
+               
     }
 
+     public void SelectedType(SelectEvent event ) {  
+         
+         if (event.getObject().toString().equalsIgnoreCase("Discret") ){
+             Integrator = Integrator1;
+         }
+         else Integrator = Integrator2;
+    } 
+    
+    
     public List<String> getIntegrator1() {
         return Integrator1;
     }
@@ -59,6 +84,16 @@ public class ControlInfo implements Serializable{
         return TypeIntegrator;
     }
 
+    public List<String> getIntegrator() {
+        return Integrator;
+    }
+
+    public void setIntegrator(List<String> Integrator) {
+        this.Integrator = Integrator;
+    }
+
+    
+    
     public void setIntegrator1(List<String> Integrator1) {
         this.Integrator1 = Integrator1;
     }
@@ -69,6 +104,22 @@ public class ControlInfo implements Serializable{
 
     public void setTypeIntegrator(List<String> TypeIntegrator) {
         this.TypeIntegrator = TypeIntegrator;
+    }
+
+    public HashMap<String, Integer> getParameters() {
+        return Parameters;
+    }
+
+    public HashMap<String, Integer> getVariables() {
+        return variables;
+    }
+
+    public void setParameters(HashMap<String, Integer> Parameters) {
+        this.Parameters = Parameters;
+    }
+
+    public void setVariables(HashMap<String, Integer> variables) {
+        this.variables = variables;
     }
     
     
