@@ -25,7 +25,7 @@ public class MindMapBean implements Serializable {
     private MindmapNode selectedNode ;
     private List<MindmapNode> ListNoeud; 
     
-    private MindmapNode tmpNode ;
+    private MindmapNode tmpNode = null;
       
     public MindMapBean() {
         

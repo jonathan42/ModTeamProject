@@ -9,7 +9,7 @@
     <f:view contentType="text/html">
         <h:head>
             <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <meta content='text/xhtml+xml; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Demo Mod-TEAM</title>
             </f:facet>
         </h:head>
@@ -17,47 +17,33 @@
 
         <h:body>
 
-            <p:layout fullPage="true">
+            <p:layout fullPage="true" >
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    <center> Presentation Demo de l'interface pour la modélisation </center>
-                     <h:link outcome="page-2" value="node" />
+                    
+                     <!-- insertion de la bannier de la page -->
+                     <ui:insert>
+                         <ui:include src="/banner.xhtml" />
+                     </ui:insert>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
-                    <center> Crée par l'équipe Mod-Team de l'entreprise virtuel Castle Tech pour l'INSERM (c) Made in Gphy </center>
+                      <!-- insertion du footer de la page -->
+                     <ui:insert>
+                         <ui:include src="/footer.xhtml" />
+                     </ui:insert>
+                  
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="160" header="Menu" collapsible="true">
-                    <h:form id="menu">  
-                        
-                        <p:toolbar>  
-                        <p:toolbarGroup align="left"> 
-                       <!-- Bouton d'insertion  Atomique -->
-                        <p:commandButton value="Add Node Atomique"  update="mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/> 
-                            <!-- Bouton d'insertion Composé -->
-                            <p:commandButton value="Add Node Composé"  update="mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
-                            <!-- Bouton Suppresion -->
-                            <p:commandButton value="Suppresion"  update="mindmap" id="sup" action="null"  ajax="false"/> 
-                        
-                        <p:separator />
-                            <!-- Bouton d'Open Project -->
-                        <p:commandButton value="Open Project"  update="mindmap" id="open" action="null"  ajax="false"/> 
-                            <!-- Bouton Convert C++ -->
-                        <p:commandButton value="Convert C++"  update="mindmap" id="convert" action="null"  ajax="false"/> 
-                        
-                         <p:separator />
-                             <!-- Bouton d'Import C++ -->
-                        <p:commandButton value="Import C++"  update="mindmap" id="import" action="null"  ajax="false"/> 
-                            <!-- Bouton Export PNG -->
-                        <p:commandButton value="Export PNG"  update="mindmap" id="export" action="null"  ajax="false"/> 
-                       
-                        </p:toolbarGroup>
-                        </p:toolbar>    
-                    </h:form >  
+                     <!-- insertion du menu de la page -->
+                     <ui:insert>
+                         <ui:include src="/menu_left.xhtml" />
+                     </ui:insert>
+                    
                 </p:layoutUnit>
 
-                
+                <!-- Conteneur de la page -->
                 <p:layoutUnit position="center">
              
 
@@ -81,40 +67,14 @@
                         <p:ajax event="tabClose" listener="#{tabBean.onTabClose}" update=":canvas:tabView" />
                      
                             <p:tab id="personal1" title="#{tab}"  closable="true">  
-
-                                <p:panel header="Node">
+                                 <!-- insertion du menu de la page -->
+                     <ui:insert>
+                         <ui:include src="/viewNode.xhtml" />
+                     </ui:insert>
+                                <!--<p:panel header="Node">
                                     <h:panelGrid columns="2" columnClasses="label, value">  
                                         <f:facet name="header">  
                                             <h:outputText value="nom :" />  
-                                            <h:inputText value="#{mindmapBean.tmpNode.label}" id="Nom01"/> 
-                                        </f:facet>  
-
-                                        <h:outputText value="Description:" />  
-                                        <h:inputText value="#{mindmapBean.tmpNode.data}" id="Desc01"/>  
-
-                                        <h:outputText value="parent:" />  
-                                        <h:inputText value="#{mindmapBean.tmpNode.parent}" id="autre01"/>  
-
-                                    </h:panelGrid>
-                                </p:panel>
-                            </p:tab> 
-                         
-
-                 </p:tabView>      
-                  
-                                <!--    
-                                    <p:graphicImage id="img" value="?" style="cursor:copy" title="Custom Options"/>  
-
-                                    <p:overlayPanel id="imgPanel" for="img" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"  
-                                                    dismissable="false" showCloseIcon="true">  
-                                        <p:panel header="Node">
-                               
-
-                                    <h:messages errorClass="error"/>  
-
-                                    <h:panelGrid columns="2" columnClasses="label, value">  
-                                        <f:facet name="header">  
-                                            <h:outputText value="{mindmapBean.tmpNode.label}" />  
                                             <h:inputText value="{mindmapBean.tmpNode.label}" id="Nom01"/> 
                                         </f:facet>  
 
@@ -125,29 +85,13 @@
                                         <h:inputText value="{mindmapBean.tmpNode.parent}" id="autre01"/>  
 
                                     </h:panelGrid>
-                                          </p:overlayPanel> 
-   -->
-                        <!--
-                         <p:dialog header="Node Details" widgetVar="details" resizable="false"  
-                                  width="720" showEffect="explode" hideEffect="explode"  >  
+                                </p:panel>-->
+                            </p:tab> 
+                         
 
-                            <h:panelGrid id="output" columns="2" cellpadding="3">  
-
-                                <f:facet name="header">  
-                                       <h:outputText value="Nom:" />  
-                                       <h:inputText value="test nom" id="Nom"/> 
-                                </f:facet>  
-
-                                <h:outputText value="Description:" />  
-                                <h:inputText value="Desc Modele" id="Desc"/>  
-
-                                <h:outputText value="autre :" />  
-                                <h:inputText value="autre" id="autre"/>  
-
+                 </p:tabView>      
+                  
                                 
-                                 <p:commandButton value="valider"   update="mindmap"  id="val"   ajax="false"/> 
-                            </h:panelGrid>  
-                        </p:dialog> --> 
                    </h:form>   
                 </p:layoutUnit>
             </p:layout>

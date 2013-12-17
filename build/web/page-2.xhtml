@@ -3,148 +3,192 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"     
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      >
 
     <f:view contentType="text/html">
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Demo Mod-TEAM</title>
+                <title>BANNER</title>
             </f:facet>
         </h:head>
 
         <h:body>
 
-            <p:layout fullPage="true">
+            <p:layout fullPage="true"    style=" margin:0px; border:0px; padding: 0px;">
 
-                <p:layoutUnit position="north" size="100" resizable="true"  collapsible="true">
-                    <center> Presentation Demo de l'interface pour la modélisation </center>                   
+                <p:layoutUnit position="north" size="10%" resizable="true"  collapsible="true">
+                    <center>BANNER</center>                   
                 </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
-                    <center> Créé par l'équipe Mod-Team de l'entreprise virtuel Castle Tech pour l'INSERM (c) Made in Gphy </center>
+                <p:layoutUnit position="south" size="4%" closable="true" collapsible="true">
+                    <center>CASTLE TECH INSERM MODTEAM GPHY</center>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="160" header="Menu" collapsible="true">
-                    <h:form id="menu">  
-                        
+                <p:layoutUnit position="west" size="13%" header="Menu" collapsible="true"   >
+                    <h:form id="menuleft">  
+
                         <p:toolbar>  
-                        <p:toolbarGroup align="left"> 
-                       <!-- Bouton d'insertion  Atomique -->
-                        <p:commandButton value="Add Node Atomique"  update="mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/> 
-                            <!-- Bouton d'insertion Composé -->
-                            <p:commandButton value="Add Node Composé"  update="mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
-                            <!-- Bouton Suppresion -->
-                            <p:commandButton value="Suppresion"  update="mindmap" id="sup" action="null"  ajax="false"/> 
-                        
-                        <p:separator />
-                            <!-- Bouton d'Open Project -->
-                        <p:commandButton value="Open Project"  update="mindmap" id="open" action="null"  ajax="false"/> 
-                             <!-- Bouton d'Import C++ -->
-                        <p:commandButton value="Import Project C++"  update="mindmap" id="import" action="null"  ajax="false"/> 
-                            
-                        
-                         <p:separator />
-                        <!-- Bouton Convert C++ -->
-                        <p:commandButton value="Convert to C++"  update="mindmap" id="convert" action="null"  ajax="false"/> 
-                            <!-- Bouton Export PNG -->
-                        <p:commandButton value="Export to PNG"  update="mindmap" id="export" action="null"  ajax="false"/> 
-                       
-                        </p:toolbarGroup>
+                            <p:toolbarGroup align="left"> 
+                                <!-- Bouton d'insertion  Atomique -->
+                                <p:commandButton value="Add Atomic Node"  update="mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/> 
+                                <!-- Bouton d'insertion Composé -->
+                                <p:commandButton value="Add Composed Node"  update="mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
+                                <!-- Bouton Suppresion -->
+                                <p:commandButton value="Delete Selected Node"  update="mindmap" id="sup"   ajax="false"/> 
+
+                                <br /><br />  <p:separator/>                           
+                                <!-- Bouton d'Open Project -->
+                                <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
+                                <!-- Bouton d'Import C++ -->
+                                <p:commandButton value="Import C++ Project"  update="mindmap" id="import"   ajax="false"/> 
+                                
+                                <br /><br />>    <p:separator/>                          
+                                <!-- Bouton Convert C++ -->
+                                <p:commandButton value="Convert To C++"  update="mindmap" id="convert"   ajax="false"/>                                
+                                <!-- Bouton Export PNG -->
+                                <p:commandButton value="Export To PNG"  update="mindmap" id="export"   ajax="false"/> 
+
+                            </p:toolbarGroup>
                         </p:toolbar>    
-                    </h:form >  
+                    </h:form>  
                 </p:layoutUnit>
-               
-                <p:layoutUnit position="center">
-            
-                    <h:form id="formdesc">     
-                        <p:growl id="grow2" sticky="true" showDetail="true"/>  
-                          <p:panelGrid columns="2">
-                              
-                            <p:panel header="Node">
-                                <p:panelGrid columns="2">
-                                    <h:outputText value="Name :" />  
-                                    <h:inputText value="test" id="Nom"/> 
-                                    
-                                    <h:outputText value="Description:" />  
-                                    <h:inputText value="test" id="Desc"/>  
-                                   
-                                    <h:outputText value="Father:" />  
-                                    <h:inputText value="test" id="pere"/>  
-                                   
-                                    <h:outputText value="Advenced Description :" />  
-                                    <p:inputTextarea rows="5" cols="30"  maxlength="10"  id="DescADVENCED"     
-                                                     value="test" autoResize="false"/>
-                                    <h:outputText value="Type of integration: " /> 
-                                    
-                                 
-                                    <p:selectOneMenu value="#{ControlInfo.typeIntegratorV}" var="type" effect="fade"  >  
-                                        <f:selectItems value="#{ControlInfo.typeIntegrator}"  />    
-                                    </p:selectOneMenu>
-                                   
-                                  
-                                    <h:outputText value="Integration: " id="Inte"/>  
-                                    <p:selectOneMenu value="#{ControlInfo.integrator1V}" var="type2" effect="fade" >  
-                                        <f:selectItems value="#{ControlInfo.integrator1}" /> 
-                                        
-                                    </p:selectOneMenu>  
-                                   
-                                    
-                                    
-                                    <h:outputText value="Integration: " id="Inte2"/>  
-                                    <p:selectOneMenu value="#{ControlInfo.integrator2V}" var="type21" effect="fade" >  
-                                        <f:selectItems value="#{ControlInfo.integrator2}" /> 
-                                    </p:selectOneMenu>  
-                                   
-                                    
-                                </p:panelGrid>
-                            </p:panel>
-                             
-                              <p:panel header="Desc parameter" id="test">
-                                <p:panelGrid columns="2" >
-                                    <h:outputText value="Parameter :" />  
-                                    <p:commandButton value="Add Parameter"  update="ListPara" id="addparam" action="#{ControlInfo.addParameter}"  ajax="false"/> 
-                                      <p:dataList id="ListPara" value="#{ControlInfo.parameters}" var="para"  itemType="disc" >  
-                                        #{para.names} : 
-                                        <h:inputText value="#{para.values}" id="Desc2"/>  
-                                        <p:commandButton value="X"  update="ListPara" id="delparam" action="#{ControlInfo.delParameter(para)}"  ajax="false"/> 
+
+                <p:layoutUnit position="center"   style=" margin:0px; padding: 0px;  border:0px">
+                    <p:layout style=" margin:0px; border:0px; padding: 0px;">
+                        <p:layoutUnit id="inner_center" position="center" size="0" style=" margin:0px; border:0px; padding: 0px"></p:layoutUnit>
+
+
+                        <p:layoutUnit id="inner_west" position="west" size="50%" style="  margin:0px; ">
+                            <h:form id="formNode">     
+                                <p:growl id="grow2" sticky="true" showDetail="true" />                         
+                                <p:panel header="Node"    style=" margin:0px; border:0px; padding: 0px;   " closeTitle="true" >
+
+                                    <p:panelGrid columns="2"  style="border-width: 0px;  padding: 0px; width: 100%;  " >
+                                        <h:outputText value="Name :" />  
+                                        <h:inputText  value="label" id="Nom" size="20" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; " /> 
+
+                                        <h:outputText value="Description:" />  
+                                        <p:inputTextarea rows="5" cols="30"  maxlength="100"  id="DescSIMPLE"     
+                                                         value="data" autoResize="true" style=" background: #ffffff; padding:0px;min-width: 98%; margin-left: 1%; margin-right: 1%    " />  
+
+                                        <h:outputText value="Father:" />  
+                                        <h:inputText value="parent" id="pere" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%  "/>  
+
+                                        <h:outputText value="Advanced Description :" />  
+                                        <p:inputTextarea rows="5" cols="30"  maxlength="1000"  id="DescADVANCED"     
+                                                         value="data" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
+                                        <h:outputText value="Type of integration: " /> 
+
+                                        <p:selectOneMenu value="#{ControlInfo.typeIntegratorV}" var="type" effect="fade"  style=" padding:0px;  min-width: 98%; margin-left: 1%; margin-right: 1% ">  
+                                            <f:selectItems value="#{ControlInfo.typeIntegrator}"   />    
+                                        </p:selectOneMenu>
+
+                                        <h:outputText value="Integration: " id="Inte"/>  
+                                        <p:selectOneMenu value="#{ControlInfo.integrator1}" var="type2" effect="fade" >  
+                                            <f:selectItems value="#{ControlInfo.integrator1}" /> 
+                                        </p:selectOneMenu>  
+                                     
+                                    </p:panelGrid>
+                                </p:panel>
+                            </h:form>
+                        </p:layoutUnit>
+
+                        <p:layoutUnit id="inner_east" position="east" size="50%" style=" margin:0px; ">
+                            <h:form id="formDecription">
+                                <p:panel header="Desc parameter" style=" margin:0px; border:0px; padding: 0px;">
+                                    <p:panelGrid columns="2" style=" margin:0px; border:0px; padding: 0px; width: 100%;">
+                                        <h:outputText value="Parameter :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%;border:0px;  "/>  
+                                        <!--   Gestion du bouton pour add element -->
+                                    <p:commandButton id="showDialogButton1" type="button" value="Add Parameter" onclick="dlg1.show();" /> 
+                                    <!-- pop-up demenandans le nom et la valeur -->
+                                    <p:dialog header="Enter Information" widgetVar="dlg1" resizable="false">  
+
+                                            <h:panelGrid columns="2" style="margin-bottom:10px">  
+                                                <h:outputLabel for="Namespara" value="Names:" />  
+                                                <p:inputText id="Namespara" value="#{ControlInfo.namesP}"  /> 
+                                                <h:outputLabel for="Valuespara" value="Values:" />
+                                                <p:inputText id="Valuespara" value="#{ControlInfo.valP}"  />      
+                                            </h:panelGrid>  
+
+                                        <p:commandButton id="submitButton1" value="Submit" update="listPara" oncomplete="dlg1.hide();" actionListener="#{ControlInfo.addParameter(ControlInfo.namesP, ControlInfo.valP)}"/>  
+
+                                    </p:dialog> 
+                                        <!--  Generation de la liste -->
+                                        <p:dataList id="listPara" value="#{ControlInfo.parameters}" var="para" itemType="disc">  
+                                       #{para.names} : 
+                                        <h:inputText value="#{para.values}" id="Variableetat1"/> 
+                                          <!--  gestion de la suppresion de la variable -->
+                                          <p:commandButton   update="listPara" actionListener="#{ControlInfo.delParameter(para)}" icon="ui-icon-close" > 
+                                                <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert" />  
+                                            </p:commandButton>  
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"  />  
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />       
+                                            </p:confirmDialog>                               
                                     </p:dataList> 
-                                    <br />
-                                    <h:outputText value="State Variable:" />  
-                                         <p:commandButton value="Add Variable"   id="addvaria" action="null"  ajax="false"/>
-                                    <p:dataList value="param" var="car" itemType="disc">  
-                                        <h:outputText value="Variable name:" />  
-                                        <h:inputText value="test" id="Variableetat"/> 
-                                         <p:commandButton value="X"   id="delvaria" action="null"  ajax="false"/> 
+
+                                        <br />
+                                        <h:outputText value="State Variable:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
+                                        <!--   Gestion du bouton pour add element -->
+                                    <p:commandButton id="showDialogButton" type="button" value="Add Variable" onclick="dlg.show();" /> 
+                                    <!-- pop-up demenandans le nom et la valeur -->
+                                    <p:dialog header="Enter Information" widgetVar="dlg" resizable="false">  
+                                            <h:panelGrid columns="2" style="margin-bottom:10px">  
+                                                <h:outputLabel for="Names" value="Names:" />  
+                                                <p:inputText id="Names" value="#{ControlInfo.namesV}"  /> 
+                                                <h:outputLabel for="Values" value="Values:" />
+                                                <p:inputText id="Values" value="#{ControlInfo.valV}"  />
+                                            </h:panelGrid>  
+
+                                            <p:commandButton id="submitButton" value="Submit" update="listVar listVar2" oncomplete="dlg.hide();" actionListener="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}"/>  
+                                    </p:dialog> 
+                                        <!--  Generation de la liste -->
+                                    <p:dataList id="listVar" value="#{ControlInfo.variables}" var="val" itemType="disc">  
+                                       #{val.names} : 
+                                        <h:inputText value="#{val.values}" id="Variableetat"/> 
+
+                                          <!--  gestion de la suppresion de la variable -->
+                                          <p:commandButton   update="listVar"  actionListener="#{ControlInfo.delVariables(val)}" icon="ui-icon-close" > 
+                                                <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert"  />                                             
+                                        </p:commandButton >  
+                                                
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />                                               
+                                            </p:confirmDialog>     
                                     </p:dataList>   
-                                   <br />
-                                    <h:outputText value="Equation:" />
-                                      <p:commandButton value="Test"   id="testequation" action="null"  ajax="false"/>
-                                    <h:inputText value="test" id="equation"/>  
-                                  
-                                     <br />
-                                     
-                                    <h:outputText value="Derivees :" />  
-                                     <p:commandButton value="Test"   id="testderivee" action="null"  ajax="false"/>
-                                    <h:inputText value="test" id="deriver"/>  
-                                   
-                                 
-                                    <br />
-                                   <p:commandButton value="Input"   id="input" action="null"  ajax="false"/>
-                                     <br />
-                                   <p:commandButton value="Output"   id="output" action="null"  ajax="false"/>
-                                     
-                                </p:panelGrid>
-                            </p:panel>
-                          </p:panelGrid>
-                                                        
-                              
-                              
-                   </h:form>   
+                                        <br />
+                                        <h:outputText value="Equation:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
+                                        <p:commandButton value="Test"   id="testequation" action="null"  ajax="false" style="padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
+                                        <h:inputText value="ttt" id="equation" style="padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
+                                        <br />
+                                        <h:outputText value="Derivees :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
+                                    <p:dataList id="listVar2" value="#{ControlInfo.variables}" var="val2" itemType="disc"  >  
+                                        <p:commandButton value="test"   id="testderivee" action="null"  ajax="false"/>
+                                        <h:inputText value="#{val2.derive}" id="deriver"/>  
+                                    </p:dataList>
+                                        <br />
+                                        <p:commandButton value="Input"   id="input" action="null"  ajax="false" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
+                                        <br />
+                                        <p:commandButton value="Output"   id="output" action="null"  ajax="false" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
+
+                                    </p:panelGrid>
+                                </p:panel>
+                            </h:form>
+                        </p:layoutUnit>      
+                    </p:layout>        
                 </p:layoutUnit>
             </p:layout>
         </h:body>
     </f:view>
 </html>
+
+
+
+
+
+
+
 
 

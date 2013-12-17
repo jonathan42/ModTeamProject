@@ -1,0 +1,28 @@
+<h:form id="menu"  
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui">  
+
+    <p:toolbar>  
+        <p:toolbarGroup align="left"> 
+            <!-- Bouton d'insertion  Atomique -->
+            <p:commandButton value="Add Atomic Node"  update="mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/> 
+            <!-- Bouton d'insertion Composé -->
+            <p:commandButton value="Add Composed Node"  update="mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
+            <!-- Bouton Suppresion -->
+            <p:commandButton value="Delete Selected Node"  update="mindmap" id="sup"   ajax="false"/> 
+
+            <p:separator />                             
+            <!-- Bouton d'Open Project -->
+            <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
+            <!-- Bouton d'Import C++ -->
+            <p:commandButton value="Import C++ Project"  update="mindmap" id="import"   ajax="false"/> 
+
+             <p:separator />                          
+            <!-- Bouton Convert C++ -->
+            <p:commandButton value="Convert To C++"  update="mindmap" id="convert"   ajax="false"/>                                
+            <!-- Bouton Export PNG -->
+            <p:commandButton value="Export To PNG"  update="mindmap" id="export"   ajax="false"/> 
+
+        </p:toolbarGroup>
+    </p:toolbar>   
+</h:form >  

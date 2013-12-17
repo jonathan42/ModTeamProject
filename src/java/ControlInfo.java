@@ -1,9 +1,12 @@
 
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 
@@ -35,23 +38,53 @@ public class ControlInfo implements Serializable{
     
     //
     private List<Parameter> Parameters ;
+    private String NamesP;
+    private String ValP;
     
-    
-    private List<String> variablesName ;
-    private List<Integer> variablesValues ;
+    private List<Variable> variables;
+    private String NamesV;
+    private String ValV;
+   
     
     public ControlInfo() {
         
-         Integrator1 = new ArrayList<String>();
-         Integrator1.add("YYYY");
-         Integrator1.add("ZZZZ");
-         Integrator1.add("TTTT");
+         Integrator = new ArrayList<String>();
          
+         Integrator1 = new ArrayList<String>();
+         Integrator1.add("NONE"); 	
+        Integrator1.add("EULER"); 	
+        Integrator1.add("M2SL_RK4"); 	
+        Integrator1.add("RK2"); 	
+        Integrator1.add("RK4");	
+        Integrator1.add("RKF45"); 	
+        Integrator1.add("RKCK"); 	
+        Integrator1.add("RK8PD"); 	
+        Integrator1.add("RK2IMP"); 	
+        Integrator1.add("RK4IMP"); 	
+        Integrator1.add("BSIMP"); 	
+        Integrator1.add("GEAR1"); 	
+        Integrator1.add("GEAR2"); 	
+
+         
+
+
          
          Integrator2 = new ArrayList<String>();
-         Integrator2.add("XXXX");
-         Integrator2.add("AAAA");
-         Integrator2.add("WWWW");
+         Integrator2.add("NONE"); 	
+        Integrator2.add("EULER"); 	
+        Integrator2.add("M2SL_RK4"); 	
+        Integrator2.add("RK2"); 	
+        Integrator2.add("RK4");	
+        Integrator2.add("RKF45"); 	
+        Integrator2.add("RKCK"); 	
+        Integrator2.add("RK8PD"); 	
+        Integrator2.add("RK2IMP"); 	
+        Integrator2.add("RK4IMP"); 	
+        Integrator2.add("BSIMP"); 	
+        Integrator2.add("GEAR1"); 	
+        Integrator2.add("GEAR2"); 	
+        Integrator2.add("DTIME"); 	
+        Integrator2.add("AE"); 
          
          
          TypeIntegrator = new ArrayList<String>();
@@ -60,30 +93,68 @@ public class ControlInfo implements Serializable{
          
          
          Parameters = new ArrayList<Parameter>();
-         Parameters.add(new Parameter("para", 10));
-         Parameters.add(new Parameter("para2", 110));
-         Parameters.add(new Parameter("para3", 120));
-         
- 
-         
-         /*variables = new ArrayList<String>();
-         variables.put("Var1", 10);
-         variables.put("Var2", 1);
-         variables.put("Var3", 100);*/
+    
+         variables = new ArrayList<Variable>();
+
                
     }
-
-    public void addParameter(){
+ 
+    public void choixIntegration (ActionEvent event){
+         
+        String label = "discret";
+         
+           if(label.equalsIgnoreCase("discret")) {  
+                  Integrator = Integrator1;
+            }  
+            else if(label.equalsIgnoreCase("continu")) {  
+                  Integrator = Integrator2;
+                } 
+            else Integrator = Integrator1;
         
-         Parameters.add(new Parameter("para5", 105));
-       
+    }
+            
+    public void addParameter(){      
+         Parameters.add(new Parameter("para5", 105)); 
+    }
+    
+    public void addParameter(String names ,String val){ 
+        
+         Parameters.add(new Parameter(names, Integer.parseInt(val))); 
+         NamesP=null;
+         ValP=null;
     }
     
     public void delParameter(Object o){
+        
         boolean val;
         val=Parameters.remove(o);
+         o = null;
     }
     
+    
+    public void addVariables(){      
+         variables.add(new Variable("para5", 105)); 
+    }
+    
+    
+    public void addVariables(String names ,String val){ 
+        
+         variables.add(new Variable(names, Integer.parseInt(val)));
+         NamesV=null;
+         ValV=null;
+    }
+    
+    public void delVariables(Object o){
+       // FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirm delete ",  "Variable delete .");  
+          
+        //FacesContext.getCurrentInstance().addMessage(null, message); 
+        
+        boolean val2;
+        val2=variables.remove(o);
+        // faire un message erreur si erreur
+        o = null;
+        
+    }
     
      public void SelectedType(SelectEvent event ) {  
          
@@ -128,25 +199,34 @@ public class ControlInfo implements Serializable{
         this.TypeIntegrator = TypeIntegrator;
     }
 
-
-
-    public List<String> getVariablesName() {
-        return variablesName;
+    public List<Variable> getVariables() {
+        return variables;
     }
 
-    public List<Integer> getVariablesValues() {
-        return variablesValues;
+    public void setVariables(List<Variable> variables) {
+        this.variables = variables;
     }
 
-  
-
-    public void setVariablesName(List<String> variablesName) {
-        this.variablesName = variablesName;
+    public String getValP() {
+        return ValP;
     }
 
-    public void setVariablesValues(List<Integer> variablesValues) {
-        this.variablesValues = variablesValues;
+    public String getValV() {
+        return ValV;
     }
+
+    public void setValP(String ValP) {
+        this.ValP = ValP;
+    }
+
+    public void setValV(String ValV) {
+        this.ValV = ValV;
+    }
+
+
+
+   
+
 
     //////////////////////////////////////
     public List<Parameter> getParameters() {
@@ -188,10 +268,34 @@ public class ControlInfo implements Serializable{
     public void setIntegratorV(String IntegratorV) {
         this.IntegratorV = IntegratorV;
     }
+
+    public String getNamesP() {
+        return NamesP;
+    }
+    
+    public void setNamesP(String NamesP) {
+        this.NamesP = NamesP;
+    }
+
+    public String getNamesV() {
+        return NamesV;
+    }
+
+    public void setNamesV(String NamesV) {
+        this.NamesV = NamesV;
+    }
+
+  
     
     
     
     
+    ///////////////////////////////////////////////////////////////////////////
+    public void deleteWorld(ActionEvent actionEvent){  
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "System Error",  "Please try again later.");  
+          
+        FacesContext.getCurrentInstance().addMessage(null, message);  
+    }  
     
     
     
