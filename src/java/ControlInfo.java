@@ -50,8 +50,8 @@ public class ControlInfo implements Serializable{
         
          Integrator = new ArrayList<String>();
          
-         Integrator1 = new ArrayList<String>();
-         Integrator1.add("NONE"); 	
+        Integrator1 = new ArrayList<String>();
+        Integrator1.add("NONE"); 	
         Integrator1.add("EULER"); 	
         Integrator1.add("M2SL_RK4"); 	
         Integrator1.add("RK2"); 	
@@ -70,26 +70,14 @@ public class ControlInfo implements Serializable{
 
          
          Integrator2 = new ArrayList<String>();
-         Integrator2.add("NONE"); 	
-        Integrator2.add("EULER"); 	
-        Integrator2.add("M2SL_RK4"); 	
-        Integrator2.add("RK2"); 	
-        Integrator2.add("RK4");	
-        Integrator2.add("RKF45"); 	
-        Integrator2.add("RKCK"); 	
-        Integrator2.add("RK8PD"); 	
-        Integrator2.add("RK2IMP"); 	
-        Integrator2.add("RK4IMP"); 	
-        Integrator2.add("BSIMP"); 	
-        Integrator2.add("GEAR1"); 	
-        Integrator2.add("GEAR2"); 	
-        Integrator2.add("DTIME"); 	
-        Integrator2.add("AE"); 
+         Integrator2.add("NONE"); 	 	
+         Integrator2.add("DTIME"); 	
+         Integrator2.add("AE"); 
          
          
-         TypeIntegrator = new ArrayList<String>();
-         TypeIntegrator.add("Discret");
-         TypeIntegrator.add("Continu");
+         //TypeIntegrator = new ArrayList<String>();
+        // TypeIntegrator.add("Discret");
+        // TypeIntegrator.add("Continu");
          
          
          Parameters = new ArrayList<Parameter>();
@@ -101,12 +89,12 @@ public class ControlInfo implements Serializable{
  
     public void choixIntegration (ActionEvent event){
          
-        String label = "discret";
+        
          
-           if(label.equalsIgnoreCase("discret")) {  
+           if(event.equals(this)) {  
                   Integrator = Integrator1;
             }  
-            else if(label.equalsIgnoreCase("continu")) {  
+            else if(event.equals(this)) {  
                   Integrator = Integrator2;
                 } 
             else Integrator = Integrator1;
