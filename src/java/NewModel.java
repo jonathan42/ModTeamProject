@@ -16,7 +16,7 @@ public class NewModel {
     
     
     
-    public String name;
+        public String name;
     
     
 	public boolean atomic;
@@ -48,15 +48,7 @@ public class NewModel {
 	Object[] ArrayParAll = new Object[0];
 	Object[] ArrayStAll = new Object[0];
     
-           private String Integrator1V;
-    private String Integrator2V;
-    private String TypeIntegratorV;
-    private String IntegratorV;
-    
-    private List<String> Integrator1;
-    private List<String> Integrator2;
-    private List<String> TypeIntegrator;
-    private List<String> Integrator;
+       
 
     
     //list Parameters (name value)

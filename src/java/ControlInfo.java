@@ -32,10 +32,10 @@ public class ControlInfo implements Serializable{
     
     private List<String> Integrator1;
     private List<String> Integrator2;
-    private List<String> TypeIntegrator;
+    private List<String> Integrator3;
     private List<String> Integrator;
 
-    
+     private String radioV = "continu";
     //
     private List<Parameter> Parameters ;
     private String NamesP;
@@ -48,7 +48,7 @@ public class ControlInfo implements Serializable{
     
     public ControlInfo() {
         
-         Integrator = new ArrayList<String>();
+        Integrator = new ArrayList<String>();
          
         Integrator1 = new ArrayList<String>();
         Integrator1.add("NONE"); 	
@@ -65,16 +65,14 @@ public class ControlInfo implements Serializable{
         Integrator1.add("GEAR1"); 	
         Integrator1.add("GEAR2"); 	
 
-         
-
-
-         
          Integrator2 = new ArrayList<String>();
          Integrator2.add("NONE"); 	 	
          Integrator2.add("DTIME"); 	
-         Integrator2.add("AE"); 
+        
          
-         
+         Integrator3 = new ArrayList<String>();
+         Integrator3.add("NONE"); 	 	
+         Integrator3.add("AE"); 
          //TypeIntegrator = new ArrayList<String>();
         // TypeIntegrator.add("Discret");
         // TypeIntegrator.add("Continu");
@@ -87,17 +85,18 @@ public class ControlInfo implements Serializable{
                
     }
  
-    public void choixIntegration (ActionEvent event){
-         
-        
-         
-           if(event.equals(this)) {  
+    public void choixIntegration(){
+           
+           if(radioV.equalsIgnoreCase("Continu") ){  
                   Integrator = Integrator1;
             }  
-            else if(event.equals(this)) {  
+            else if(radioV.equalsIgnoreCase("Discret")) {  
                   Integrator = Integrator2;
                 } 
-            else Integrator = Integrator1;
+            else if(radioV.equalsIgnoreCase("Algebraic")) {  
+                  Integrator = Integrator3;
+                } 
+            else Integrator = null;
         
     }
             
@@ -144,12 +143,12 @@ public class ControlInfo implements Serializable{
         
     }
     
-     public void SelectedType(SelectEvent event ) {  
+     public void SelectedType(String event ) {  
          
-         if (event.getObject().toString().equalsIgnoreCase("Discret") ){
-             Integrator = Integrator1;
+         if (event.toString().equalsIgnoreCase("Discret") ){
+             Integrator = Integrator2;
          }
-         else Integrator = Integrator2;
+         else Integrator = Integrator1;
     } 
     
     
@@ -161,8 +160,8 @@ public class ControlInfo implements Serializable{
         return Integrator2;
     }
 
-    public List<String> getTypeIntegrator() {
-        return TypeIntegrator;
+    public List<String> getIntegrator3() {
+        return Integrator3;
     }
 
     public List<String> getIntegrator() {
@@ -183,8 +182,8 @@ public class ControlInfo implements Serializable{
         this.Integrator2 = Integrator2;
     }
 
-    public void setTypeIntegrator(List<String> TypeIntegrator) {
-        this.TypeIntegrator = TypeIntegrator;
+    public void setIntegrator3(List<String> Integrator3) {
+        this.Integrator3 = Integrator3;
     }
 
     public List<Variable> getVariables() {
@@ -271,6 +270,14 @@ public class ControlInfo implements Serializable{
 
     public void setNamesV(String NamesV) {
         this.NamesV = NamesV;
+    }
+
+    public String getRadioV() {
+        return radioV;
+    }
+
+    public void setRadioV(String radioV) {
+        this.radioV = radioV;
     }
 
   
