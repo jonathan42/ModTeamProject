@@ -210,9 +210,9 @@ public class ModelDefault {
 		String[] IN = new String[l+1];
 		for (int k=0; k<l; k++) IL[k]=InstanceList[k];
 		for (int k=0; k<l; k++) IN[k]=InstanceName[k];
-		//Instance Inst = new Instance(M, s);
+                Instance Inst = new Instance(M, s) {};
 		
-	//	IL[l] = Inst;
+		IL[l] = Inst;
 		IN[l] = s;
 		InstanceList = IL;
 		InstanceName = IN;
