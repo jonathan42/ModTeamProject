@@ -27,17 +27,17 @@
                                         <p:inputTextarea rows="5" cols="30"  maxlength="1000"  id="DescADVANCED"     
                                                          value="data" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
                                         <h:outputText value="Type of integration: " /> 
-                                        <p:selectOneRadio id="options" value="#{formBean.number}" > 
+                                        <p:selectOneRadio id="options"  > 
+                                          
+                                            <f:selectItem itemLabel="Continu" itemValue="1" value="continu" />  
+                                            <f:selectItem itemLabel="Discret" itemValue="2" value="discret" />  
+                                            <f:selectItem itemLabel="Algebraic" itemValue="3" value="algebraic"/>  
                                             <p:ajax event="select" update="Inte" listener="#{ControlInfo.choixIntegration}" />
-                                            <f:selectItem itemLabel="Continu" itemValue="1" />  
-                                            <f:selectItem itemLabel="Discret" itemValue="2" />  
-                                            <f:selectItem itemLabel="Algebraic" itemValue="3" />  
-                                            
                                         </p:selectOneRadio>
                                         
 
-                                        <h:outputText value="Integration: " id="Inte"/>  
-                                        <p:selectOneMenu value="#{ControlInfo.integrator1}" var="type2" effect="fade" >  
+                                        <h:outputText value="Integration: "  />  
+                                        <p:selectOneMenu id="Inte" value="#{ControlInfo.integrator1}" var="type2" effect="fade" >  
                                             <f:selectItems value="#{ControlInfo.integrator1}" /> 
                                         </p:selectOneMenu>  
                                      

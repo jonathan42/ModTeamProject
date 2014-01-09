@@ -10,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 
+
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -85,28 +87,36 @@ public class ControlInfo implements Serializable{
                
     }
  
-    public void choixIntegration(){
-           
-           if(radioV.equalsIgnoreCase("Continu") ){  
+    public void choixIntegration(String event){
+                 
+      //   try {
+   
+           if(event.equalsIgnoreCase("Continu") ){  
                   Integrator = Integrator1;
             }  
-            else if(radioV.equalsIgnoreCase("Discret")) {  
+            else if(event.equalsIgnoreCase("Discret")) {  
                   Integrator = Integrator2;
                 } 
-            else if(radioV.equalsIgnoreCase("Algebraic")) {  
+            else if(event.equalsIgnoreCase("Algebraic")) {  
                   Integrator = Integrator3;
                 } 
             else Integrator = null;
-        
+      //  } // try
+
+     //   catch (Exception e) {
+     //       FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "System Error",  e.toString() );
+          
+      //  }
+         
     }
             
     public void addParameter(){      
-         Parameters.add(new Parameter("para5", 105)); 
+         Parameters.add(new Parameter("para5", (double)105)); 
     }
     
     public void addParameter(String names ,String val){ 
         
-         Parameters.add(new Parameter(names, Integer.parseInt(val))); 
+         Parameters.add(new Parameter(names, Double.parseDouble(val))); 
          NamesP=null;
          ValP=null;
     }
@@ -120,13 +130,13 @@ public class ControlInfo implements Serializable{
     
     
     public void addVariables(){      
-         variables.add(new Variable("para5", 105)); 
+         variables.add(new Variable("para5", (double)105)); 
     }
     
     
     public void addVariables(String names ,String val){ 
         
-         variables.add(new Variable(names, Integer.parseInt(val)));
+         variables.add(new Variable(names, Double.parseDouble(val)));
          NamesV=null;
          ValV=null;
     }
@@ -141,6 +151,19 @@ public class ControlInfo implements Serializable{
         // faire un message erreur si erreur
         o = null;
         
+    }
+    
+    public NewModel saveNode (){ 
+        NewModel mode = new NewModel(true);
+        
+        //mode.name =;
+        //mode.Description = ;
+        //mode.advanced_desc = ;
+        //mode.father =;
+        mode.setParameters(Parameters);
+        mode.setVariables(variables);
+        
+        return mode;
     }
     
      public void SelectedType(String event ) {  
@@ -210,9 +233,6 @@ public class ControlInfo implements Serializable{
         this.ValV = ValV;
     }
 
-
-
-   
 
 
     //////////////////////////////////////

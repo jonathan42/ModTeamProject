@@ -10,9 +10,9 @@
 public class Parameter {
     
     private String Names;
-    private Integer Values;
+    private Double Values;
 
-    public Parameter(String Names, Integer Values) {
+    public Parameter(String Names, Double Values) {
         this.Names = Names;
         this.Values = Values;
     }
@@ -21,7 +21,7 @@ public class Parameter {
         return Names;
     }
 
-    public Integer getValues() {
+    public Double getValues() {
         return Values;
     }
 
@@ -29,7 +29,7 @@ public class Parameter {
         this.Names = Names;
     }
 
-    public void setValues(Integer Values) {
+    public void setValues(Double Values) {
         this.Values = Values;
     }
     

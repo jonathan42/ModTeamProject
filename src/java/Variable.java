@@ -11,17 +11,17 @@ public class Variable {
     
     
     private String Names;
-    private Integer Values;
+    private Double Values;
     private String Derive;
 
     
-    public Variable(String Names, Integer Values) {
+    public Variable(String Names, Double Values) {
         this.Names = Names;
         this.Values = Values;
         this.Derive = null;
     }
     
-    public Variable(String Names, Integer Values, String derive) {
+    public Variable(String Names, Double Values, String derive) {
         this.Names = Names;
         this.Values = Values;
         this.Derive = derive;
@@ -31,7 +31,7 @@ public class Variable {
         return Names;
     }
 
-    public Integer getValues() {
+    public Double getValues() {
         return Values;
     }
 
@@ -39,7 +39,7 @@ public class Variable {
         this.Names = Names;
     }
 
-    public void setValues(Integer Values) {
+    public void setValues(Double Values) {
         this.Values = Values;
     }
 

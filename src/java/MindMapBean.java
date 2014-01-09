@@ -25,8 +25,10 @@ public class MindMapBean implements Serializable {
     private MindmapNode selectedNode ;
     private List<MindmapNode> ListNoeud; 
     
-    private MindmapNode tmpNode = null;
+    private MindmapNode tmpNode;
       
+    private String label;
+    
     public MindMapBean() {
         
       List<MindmapNode> List = null ;
@@ -35,7 +37,7 @@ public class MindMapBean implements Serializable {
       for (int i = 1; i <List.size(); i++){
             root.addNode(List.get(i));
         }
-      selectedNode = root;
+      selectedNode = tmpNode = root;
       
     }  
   
@@ -45,15 +47,27 @@ public class MindMapBean implements Serializable {
   
     public List<MindmapNode> newlistNode(){
         // geneartion noeud racine
-        root = new DefaultMindmapNode("google.com", "Google WebSite", "FFCC00", false);  
+        NewModel test = new NewModel(true, "root", label, root, label, label, label, null, null, "FFCC00");
+        root = new DefaultMindmapNode(test.name, test, test.color, false);  
         
         // geneartion  élémént
-        MindmapNode ips = new DefaultMindmapNode("IPs", "IP Numbers", "FFCC00", true);  
-        MindmapNode ns = new DefaultMindmapNode("NS(s)", "Namespaces", "FFCC00", true);  
-        MindmapNode malware = new DefaultMindmapNode("Malware", "Malicious", "FFCC00", true);  
-        MindmapNode malwa = new DefaultMindmapNode("Virus", "Virus", "6e9ebf", true);  
-        MindmapNode malwar = new DefaultMindmapNode("Toto", "Toto", "FFCC00", true);  
-        MindmapNode malwarr = new DefaultMindmapNode("Titi", "Titi", "6e9ebf", true);
+        NewModel test2 = new NewModel(true, "IPs", label, root, label, label, label, null, null, "FFCC00");
+        MindmapNode ips = new DefaultMindmapNode(test2.name, test2, test2.color, true);  
+        
+        NewModel test3 = new NewModel(true, "NS(s)", label, root, label, label, label, null, null, "FFCC00");
+        MindmapNode ns = new DefaultMindmapNode(test3.name, test3, test3.color, true); 
+        
+        NewModel test4 = new NewModel(true, "Malware", label, root, label, label, label, null, null, "6e9ebf");
+        MindmapNode malware = new DefaultMindmapNode(test4.name, test4, test4.color, true); 
+        
+        NewModel test5 = new NewModel(true, "Virus", label, root, label, label, label, null, null, "6e9ebf");
+        MindmapNode malwa = new DefaultMindmapNode(test5.name, test5, test5.color , true); 
+        
+        NewModel test6 = new NewModel(true, "Toto", label, root, label, label, label, null, null, "FFCC00");
+        MindmapNode malwar = new DefaultMindmapNode(test6.name, test6, test6.color, true); 
+        
+        NewModel test7 = new NewModel(true, "Titi", label, root, label, label, label, null, null, "6e9ebf");
+        MindmapNode malwarr = new DefaultMindmapNode(test7.name, test7, test7.color, true);
          
         
         // création de la list 
@@ -70,9 +84,11 @@ public class MindMapBean implements Serializable {
         return ListNoeud;
     }
     public void addListNode() {
-  
-        MindmapNode tmp = new DefaultMindmapNode("test", "test", "6e9ebf", true);
-            tmpNode.addNode(tmp);       
+        
+        NewModel test = new NewModel(true);
+        MindmapNode tmp = new DefaultMindmapNode(label, test, "6e9ebf", true);
+        test.father = tmp ;
+        tmpNode.addNode(tmp);       
         //  return  ListNoeud;   
     } 
     
@@ -133,7 +149,7 @@ public class MindMapBean implements Serializable {
         DefaultMindmapNode node = (DefaultMindmapNode) event.getObject();  
           tmpNode =node;
           // modif couleur
-         /// node.setFill("6ebf8f");
+         // node.setFill("6ebf8f");
    
         }
     
@@ -157,6 +173,18 @@ public class MindMapBean implements Serializable {
 
     public void setTmpNode(MindmapNode tmpNode) {
         this.tmpNode = tmpNode;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setRoot(MindmapNode root) {
+        this.root = root;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
  
     

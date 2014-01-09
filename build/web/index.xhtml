@@ -36,11 +36,40 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="160" header="Menu" collapsible="true">
-                     <!-- insertion du menu de la page -->
+                     <!-- insertion du menu de la page
                      <ui:insert>
                          <ui:include src="/menu_left.xhtml" />
-                     </ui:insert>
-                    
+                     </ui:insert> -->
+                     
+                     <!-- formulaire du menu -->
+                    <h:form id="menu">  
+
+    <p:toolbar>  
+        <p:toolbarGroup align="left"> 
+            <!-- Bouton d'insertion  Atomique -->
+             <p:commandButton value="Add Atomic Node"  update=":canvas:mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/>
+            <!-- Bouton d'insertion Composé -->
+            <p:commandButton value="Add Composed Node"  update=":canvas:mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
+            <!-- Bouton Suppresion -->
+            <p:commandButton value="Delete Selected Node"  update="mindmap" id="sup"   ajax="false"/> 
+
+            <p:separator />                             
+            <!-- Bouton d'Open Project -->
+            <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
+            <!-- Bouton d'Import C++ -->
+            <p:commandButton value="Import C++ Project"  update="mindmap" id="import"   ajax="false"/> 
+
+             <p:separator />                          
+            <!-- Bouton Convert C++ -->
+            <p:commandButton value="Convert To C++"  update="mindmap" id="convert"   ajax="false"/>                                
+            <!-- Bouton Export PNG -->
+            <p:commandButton value="Export To PNG"  update="mindmap" id="export"   ajax="false"/> 
+
+        </p:toolbarGroup>
+    </p:toolbar> 
+                        
+</h:form >  
+
                 </p:layoutUnit>
 
                 <!-- Conteneur de la page -->
@@ -55,7 +84,7 @@
                      <p:tab id="personal" title="Mind Map">  
                                 <p:panel header="Mind Map">
                                     <p:mindmap  id="mindmap" value="#{mindmapBean.root}" style="width:100%;height:700px;border:0.1px solid black;cursor: pointer" >  
-                                        <p:ajax event="select" listener="#{mindmapBean.NodeSelect}"   />  
+                                        <p:ajax event="select" listener="#{mindmapBean.NodeSelect2}"   />  
                                         <p:ajax event="dblselect" listener="#{tabBean.addTab}" update="tabView"  />                                                                          
                                            <!--     oncomplete="details.show()" -->
                                    </p:mindmap>  
@@ -133,7 +162,7 @@
                                                         <p:inputText id="Valuespara" value="#{ControlInfo.valP}"  />      
                                                     </h:panelGrid>  
 
-                                                    <p:commandButton id="submitButton1" value="Submit" actionListener="#{ControlInfo.addParameter(ControlInfo.namesP, ControlInfo.valP)}" update="listPara" oncomplete="dlg1.hide();" />  
+                                                    <p:commandButton id="submitButton1" value="Submit" action="#{ControlInfo.addParameter(ControlInfo.namesP, ControlInfo.valP)}" update="listPara" oncomplete="dlg1.hide();" ajax="false"/>  
 
                                                 </p:dialog> 
                                                 <!--  Generation de la liste -->
@@ -163,7 +192,7 @@
                                                         <p:inputText id="Values" value="#{ControlInfo.valV}"  />
                                                     </h:panelGrid>  
 
-                                                    <p:commandButton id="submitButton" value="Submit" update="listVar listVar2" oncomplete="dlg.hide();" actionListener="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}"/>  
+                                                    <p:commandButton id="submitButton" value="Submit" update="listVar listVar2" oncomplete="dlg.hide();" action="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}" ajax="false"/>  
                                                 </p:dialog> 
                                                 <!--  Generation de la liste -->
                                                 <p:dataList id="listVar" value="#{ControlInfo.variables}" var="val" itemType="disc">  
