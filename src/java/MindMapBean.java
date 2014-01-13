@@ -29,6 +29,8 @@ public class MindMapBean implements Serializable {
       
     private String label;
     
+    private GlobalModel modeltest; 
+    
     public MindMapBean() {
         
       List<MindmapNode> List = null ;
@@ -44,6 +46,24 @@ public class MindMapBean implements Serializable {
     public MindmapNode getRoot() {  
         return root;  
     }  
+    
+    
+    /***
+     * Save le model dans une list
+     */
+    public void SaveModel(){
+        
+        // creation de la list 
+        List<NewModel> listsave = new ArrayList<NewModel>();
+        
+        // parcours de la list de node
+         for (int i = 1; i <ListNoeud.size(); i++){
+             // ajout les node model dans le model global
+            listsave.add((NewModel) ListNoeud.get(i).getData());
+        }
+        modeltest.setModel(null);
+        
+    }
   
     public List<MindmapNode> newlistNode(){
         // geneartion noeud racine
