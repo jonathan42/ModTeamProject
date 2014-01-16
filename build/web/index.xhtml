@@ -13,18 +13,23 @@
                 <title>Demo Mod-TEAM</title>
             </f:facet>
         </h:head>
-                       <!-- test commit-->
-
+                     
         <h:body>
 
             <p:layout fullPage="true" >
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    
                      <!-- insertion de la bannier de la page -->
                      <ui:insert>
                          <ui:include src="/banner.xhtml" />
                      </ui:insert>
+                     <p class="info" >#{ControlInfo.message }
+                     
+                     
+                     
+                     </p>
+                     <br />
+                     <p id="messss"> #{SerializableModel.message2 } </p>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
@@ -42,33 +47,38 @@
                      </ui:insert> -->
                      
                      <!-- formulaire du menu -->
-                    <h:form id="menu">  
+                     <h:form id="menu" >  
 
-    <p:toolbar>  
-        <p:toolbarGroup align="left"> 
-            <!-- Bouton d'insertion  Atomique -->
-             <p:commandButton value="Add Atomic Node"  update=":canvas:mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/>
-            <!-- Bouton d'insertion Composé -->
-            <p:commandButton value="Add Composed Node"  update=":canvas:mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
-            <!-- Bouton Suppresion -->
-            <p:commandButton value="Delete Selected Node"  update="mindmap" id="sup"   ajax="false"/> 
+                         <p:toolbar>  
+                             <p:toolbarGroup align="left"> 
+                                 <!-- Bouton d'insertion  Atomique -->
+                                 <p:commandButton value="Add Atomic Node"  update=":canvas:mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/>
+                                 <!-- Bouton d'insertion Composé -->
+                                 <p:commandButton value="Add Composed Node"  update=":canvas:mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
+                                 <!-- Bouton Suppresion -->
+                                 <p:commandButton value="Delete Selected Node"  update="mindmap" id="sup"   ajax="false"/> 
 
-            <p:separator />                             
-            <!-- Bouton d'Open Project -->
-            <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
-            <!-- Bouton d'Import C++ -->
-            <p:commandButton value="Import C++ Project"  update="mindmap" id="import"   ajax="false"/> 
+                                 <p:separator />  
+                                  <!-- Bouton d'new Project -->
+                                 <p:commandButton value="New Project"  update="mindmap" id="New"   ajax="false"/>
+                                 <!-- Bouton d'Open Project -->
+                                 <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
+                                 <!-- Bouton save Project -->
+                                 <p:commandButton value="Save Project"  update="messss"  id="Savejava"  action="#{SerializableModel.Serializable( TestModel.modeltest )}" ajax="false"/> 
+                                 
+                                 
+                                 <p:separator /> 
+                                  <!-- Bouton d'Import C++ -->
+                                 <p:commandButton value="Import C++ Project"  update="mindmap" id="import"   ajax="false"/> 
+                                 <!-- Bouton Convert C++ -->
+                                 <p:commandButton value="Convert To C++"  update="mindmap" id="convert"   ajax="false"/>                                
+                                 <!-- Bouton Export PNG -->
+                                 <p:commandButton value="Export To PNG"  update="mindmap" id="export"   ajax="false"/> 
 
-             <p:separator />                          
-            <!-- Bouton Convert C++ -->
-            <p:commandButton value="Convert To C++"  update="mindmap" id="convert"   ajax="false"/>                                
-            <!-- Bouton Export PNG -->
-            <p:commandButton value="Export To PNG"  update="mindmap" id="export"   ajax="false"/> 
+                             </p:toolbarGroup>
+                         </p:toolbar> 
 
-        </p:toolbarGroup>
-    </p:toolbar> 
-                        
-</h:form >  
+                     </h:form >  
 
                 </p:layoutUnit>
 
@@ -112,18 +122,18 @@
 
                                             <p:panelGrid columns="2"  style="border-width: 0px;  padding: 0px; width: 100%;  " >
                                                 <h:outputText value="Name :" />  
-                                                <h:inputText  value="label" id="Nom" size="20" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; " /> 
+                                                <h:inputText  value="#{ControlInfo.name}" id="Nom" size="20" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; " /> 
 
                                                 <h:outputText value="Description:" />  
                                                 <p:inputTextarea rows="5" cols="30"  maxlength="100"  id="DescSIMPLE"     
-                                                                 value="data" autoResize="true" style=" background: #ffffff; padding:0px;min-width: 98%; margin-left: 1%; margin-right: 1%    " />  
+                                                                 value="#{ControlInfo.desc}" autoResize="true" style=" background: #ffffff; padding:0px;min-width: 98%; margin-left: 1%; margin-right: 1%    " />  
 
                                                 <h:outputText value="Father:" />  
                                                 <h:inputText value="parent" id="pere" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%  "/>  
 
                                                 <h:outputText value="Advanced Description :" />  
                                                 <p:inputTextarea rows="5" cols="30"  maxlength="1000"  id="DescADVANCED"     
-                                                                 value="data" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
+                                                                 value="#{ControlInfo.descadvance}" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
                                                 <h:outputText value="Type of integration: " /> 
                                                 <p:selectOneRadio id="options"   > 
                                                     <p:ajax event="click"  listener="#{ControlInfo.SelectedType(Continu)}" update="Inte" />

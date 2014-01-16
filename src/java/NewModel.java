@@ -23,7 +23,11 @@ public class NewModel implements Serializable {
     public String name;
     public String Description;
     public MindmapNode father;
-    public MindmapNode sons;
+    public List<MindmapNode> sons;
+    
+    public NewModel fatherNode;
+    public List<NewModel> sonsNode;
+    
     public String advanced_desc;
     public String integration_type;
     public String integration;
@@ -38,6 +42,8 @@ public class NewModel implements Serializable {
         this.atomic = atomic;
     }
 
+    // construction V1 mais pas avec les ellements correct
+    
     public NewModel(boolean atomic, String name, String Description, MindmapNode father, String advanced_desc, String integration_type, String integration, List<Parameter> Parameters, List<Variable> variables, String color) {
         this.atomic = atomic;
         this.name = name;
@@ -51,6 +57,35 @@ public class NewModel implements Serializable {
         this.color =color;
     }
 
+    /**
+     * Constructeur a utilisez pour le modele
+     * @param atomic
+     * @param name
+     * @param Description
+     * @param fatherNode
+     * @param sonsNode
+     * @param advanced_desc
+     * @param integration_type
+     * @param integration
+     * @param color
+     * @param Parameters
+     * @param variables 
+     */    
+    public NewModel(boolean atomic, String name, String Description, NewModel fatherNode, List<NewModel> sonsNode, String advanced_desc, String integration_type, String integration, String color, List<Parameter> Parameters, List<Variable> variables) {
+        this.atomic = atomic;
+        this.name = name;
+        this.Description = Description;
+        this.fatherNode = fatherNode;
+        this.sonsNode = sonsNode;
+        this.advanced_desc = advanced_desc;
+        this.integration_type = integration_type;
+        this.integration = integration;
+        this.color = color;
+        this.Parameters = Parameters;
+        this.variables = variables;
+    }
+
+    
     public boolean isAtomic() {
         return atomic;
     }

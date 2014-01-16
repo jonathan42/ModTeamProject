@@ -31,13 +31,21 @@ public class ControlInfo implements Serializable{
     private String Integrator2V;
     private String TypeIntegratorV;
     private String IntegratorV;
+
+    private String message = "";
+
+    
+    private String name;
+    private String desc;
+    private String descadvance;
+        
     
     private List<String> Integrator1;
     private List<String> Integrator2;
     private List<String> Integrator3;
     private List<String> Integrator;
 
-     private String radioV = "continu";
+    private String radioV = "continu";
     //
     private List<Parameter> Parameters ;
     private String NamesP;
@@ -195,6 +203,30 @@ public class ControlInfo implements Serializable{
         this.Integrator = Integrator;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public String getDescadvance() {
+        return descadvance;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setDescadvance(String descadvance) {
+        this.descadvance = descadvance;
+    }
+
     
     
     public void setIntegrator1(List<String> Integrator1) {
@@ -311,6 +343,14 @@ public class ControlInfo implements Serializable{
           
         FacesContext.getCurrentInstance().addMessage(null, message);  
     }  
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
     
     
