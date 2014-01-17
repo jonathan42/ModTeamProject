@@ -7,6 +7,7 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import org.primefaces.event.SelectEvent;
 
@@ -48,8 +49,8 @@ public class ControlInfo implements Serializable{
     private String radioV = "continu";
     //
     private List<Parameter> Parameters ;
-    private String NamesP;
-    private String ValP;
+    private String NamesP =null;
+    private String ValP=null;
     
     private List<Variable> variables;
     private String NamesV;
@@ -95,39 +96,50 @@ public class ControlInfo implements Serializable{
                
     }
  
-    public void choixIntegration(String event){
-                 
-      //   try {
-   
-           if(event.equalsIgnoreCase("Continu") ){  
-                  Integrator = Integrator1;
-            }  
-            else if(event.equalsIgnoreCase("Discret")) {  
-                  Integrator = Integrator2;
-                } 
-            else if(event.equalsIgnoreCase("Algebraic")) {  
-                  Integrator = Integrator3;
-                } 
-            else Integrator = null;
-      //  } // try
 
-     //   catch (Exception e) {
-     //       FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "System Error",  e.toString() );
-          
-      //  }
+    public void choixIntegration(AjaxBehaviorEvent event){
+                   
+       //  message += "dans de l'integration ||";
+        if (event.getBehavior()!=null){
+       // message += "debut de l'integration ||";
+        Integrator = null;
+        // Ligne pour recupere la valeur de l'object selectioner
+        String valtmp =  (String) event.getComponent().getAttributes().get("value");
+        // message += " ||" + valtmp +  " ||" ;
+           if( valtmp.equalsIgnoreCase("continu") ){  
+                  Integrator = Integrator1;
+                  // message += "continu de l'integration ||";
+            }  
+            else if(valtmp.equalsIgnoreCase("discret")) {  
+                  Integrator = Integrator2;
+                  // message += "descret de l'integration ||";
+                } 
+            else if (valtmp.equalsIgnoreCase("algebraic")) {  
+                  Integrator = Integrator3;
+                   //message += "algebric de l'integration ||";
+                } 
+        }
+       else Integrator = null;
+        
+       }
          
-    }
+    
             
     public void addParameter(){      
-         Parameters.add(new Parameter("para5", (double)105)); 
+        message += "ajout de parameter ||";
+         Parameters.add(new Parameter(NamesP,  Double.parseDouble(ValP))); 
+         message += "fin add ||";
     }
     
-    public void addParameter(String names ,String val){ 
+   /* public void addParameter(String names ,String val){ 
         
+        message += "ajout de parameter ||";
          Parameters.add(new Parameter(names, Double.parseDouble(val))); 
          NamesP=null;
          ValP=null;
-    }
+         
+         message += "fin add ||";
+    }*/
     
     public void delParameter(Object o){
         

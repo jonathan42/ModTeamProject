@@ -134,18 +134,24 @@
                                                 <h:outputText value="Advanced Description :" />  
                                                 <p:inputTextarea rows="5" cols="30"  maxlength="1000"  id="DescADVANCED"     
                                                                  value="#{ControlInfo.descadvance}" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
+                                                
+                                                
+                                                
+                                                
                                                 <h:outputText value="Type of integration: " /> 
+                                                
+                                                                        
                                                 <p:selectOneRadio id="options"   > 
-                                                    <p:ajax event="click"  listener="#{ControlInfo.SelectedType(Continu)}" update="Inte" />
+                                                   
                                                     <f:selectItem itemLabel="Continu" itemValue="continu"  />  
                                                     <f:selectItem itemLabel="Discret" itemValue="discret"  />  
                                                     <f:selectItem itemLabel="Algebraic" itemValue="algebraic"  />  
-                                                       
+                                                    <f:ajax listener="#{ControlInfo.choixIntegration}" event="click" execute="options" render="inttt" />
+   
                                                 </p:selectOneRadio>
 
-
-                                                <h:outputText value="Integration: " id="Inte"/>  
-                                                <p:selectOneMenu value="#{ControlInfo.integrator}" var="type2" effect="fade" >  
+                                                <h:outputText value="Integration: " id="int"/>  
+                                                <p:selectOneMenu value="#{ControlInfo.integrator}" var="type2" effect="fade" id="inttt" >  
                                                     <f:selectItems value="#{ControlInfo.integrator}" /> 
                                                 </p:selectOneMenu>  
 
@@ -172,13 +178,13 @@
                                                         <p:inputText id="Valuespara" value="#{ControlInfo.valP}"  />      
                                                     </h:panelGrid>  
 
-                                                    <p:commandButton id="submitButton1" value="Submit" action="#{ControlInfo.addParameter(ControlInfo.namesP, ControlInfo.valP)}" update="listPara" oncomplete="dlg1.hide();" ajax="false"/>  
+                                                    <p:commandButton id="submitButton1" value="Submit" action="#{ControlInfo.addParameter()}" update="listPara" oncomplete="dlg1.hide();" ajax="false"/>  
 
                                                 </p:dialog> 
                                                 <!--  Generation de la liste -->
-                                                <p:dataList id="listPara" value="#{ControlInfo.parameters}" var="para" itemType="disc">  
-                                       #{para.names} : 
-                                                    <h:inputText value="#{para.values}" id="Variableetat1"/> 
+                                                <p:dataList id="listPara" value="#{ControlInfo.parameters}" var="paraList" itemType="disc">  
+                                                    #{paraList.names} : 
+                                                    <h:inputText value="#{paraList.values}" id="Variableetat1"/> 
                                                     <!--  gestion de la suppresion de la variable -->
                                                     <p:commandButton   update="listPara" actionListener="#{ControlInfo.delParameter(para)}" icon="ui-icon-close" > 
                                                         <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert" />  
@@ -192,7 +198,7 @@
                                                 <br></br>
                                                 <h:outputText value="State Variable:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
                                                 <!--   Gestion du bouton pour add element -->
-                                                <p:commandButton id="showDialogButton" type="button" value="Add Variable" onclick="dlg.show();" /> 
+                                                <p:commandButton id="showDialogButton2" type="button" value="Add Variable" onclick="dlg2.show();" /> 
                                                 <!-- pop-up demenandans le nom et la valeur -->
                                                 <p:dialog header="Enter Information" widgetVar="dlg" resizable="false">  
                                                     <h:panelGrid columns="2" style="margin-bottom:10px">  
@@ -202,11 +208,11 @@
                                                         <p:inputText id="Values" value="#{ControlInfo.valV}"  />
                                                     </h:panelGrid>  
 
-                                                    <p:commandButton id="submitButton" value="Submit" update="listVar listVar2" oncomplete="dlg.hide();" action="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}" ajax="false"/>  
+                                                    <p:commandButton id="submitButton2" value="Submit" update="listVar listVar2" oncomplete="dlg2.hide();" action="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}" ajax="false"/>  
                                                 </p:dialog> 
                                                 <!--  Generation de la liste -->
                                                 <p:dataList id="listVar" value="#{ControlInfo.variables}" var="val" itemType="disc">  
-                                       #{val.names} : 
+                                                    #{val.names} : 
                                                     <h:inputText value="#{val.values}" id="Variableetat"/> 
 
                                                     <!--  gestion de la suppresion de la variable -->

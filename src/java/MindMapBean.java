@@ -36,8 +36,8 @@ public class MindMapBean implements Serializable {
       List<MindmapNode> List = null ;
       List = newlistNode();
         
-      for (int i = 1; i <List.size(); i++){
-            root.addNode(List.get(i));
+      for (int i = 1; i <ListNoeud.size(); i++){
+            root.addNode(ListNoeud.get(i));
         }
       selectedNode = tmpNode = root;
       
@@ -103,6 +103,18 @@ public class MindMapBean implements Serializable {
         
         return ListNoeud;
     }
+    
+    
+    public void newModel(){
+        // geneartion noeud racine
+        NewModel test = new NewModel(true, "root", label, root, label, label, label, null, null, "FFCC00");
+        root = new DefaultMindmapNode(test.name, test, test.color, false); 
+         ListNoeud =null;
+        ListNoeud = new ArrayList<MindmapNode>();
+        // return ListNoeud;
+    }
+    
+    
     public void addListNode() {
         
         NewModel test = new NewModel(true);
