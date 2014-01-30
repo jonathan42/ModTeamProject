@@ -25,7 +25,9 @@ import org.primefaces.model.mindmap.MindmapNode;
 public class TabBean implements Serializable{  
   
     private List<String> tabs;  
-  
+    private String message3 ="";
+    
+    
     public TabBean() {  
         tabs = new ArrayList<String>();  
       
@@ -37,6 +39,7 @@ public class TabBean implements Serializable{
     
     
     public void addTab(SelectEvent event){
+       //message3 += "add table detaille";
         MindmapNode node = (MindmapNode) event.getObject();
         //if(tabs.isEmpty()) {
         tabs.add(node.getLabel()); 
@@ -50,6 +53,20 @@ public class TabBean implements Serializable{
         FacesContext.getCurrentInstance().addMessage(null, msg);  
         
         tabs.remove(event.getTab().getFacetCount());
-    }  
+    } 
+
+    public String getMessage3() {
+        return message3;
+    }
+
+    public void setTabs(List<String> tabs) {
+        this.tabs = tabs;
+    }
+
+    public void setMessage3(String message3) {
+        this.message3 = message3;
+    }
+    
+    
 }
 

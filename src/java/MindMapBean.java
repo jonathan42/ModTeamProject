@@ -23,13 +23,11 @@ public class MindMapBean implements Serializable {
     private MindmapNode root;  
       
     private MindmapNode selectedNode ;
-    private List<MindmapNode> ListNoeud; 
-    
-    private MindmapNode tmpNode;
-      
-    private String label;
-    
+    private List<MindmapNode> ListNoeud;  
+    private MindmapNode tmpNode;      
+    private String label;    
     private GlobalModel modeltest; 
+    
     
     public MindMapBean() {
         

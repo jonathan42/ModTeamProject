@@ -13,112 +13,114 @@
                 <title>Demo Mod-TEAM</title>
             </f:facet>
         </h:head>
-                     
+
         <h:body>
 
             <p:layout fullPage="true" >
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                     <!-- insertion de la bannier de la page -->
-                     <ui:insert>
-                         <ui:include src="/banner.xhtml" />
-                     </ui:insert>
-                     <p class="info" >#{ControlInfo.message }
-                     
-                     
-                     
-                     </p>
-                     <br />
-                     <p id="messss"> #{SerializableModel.message2 } </p>
+                    <!-- insertion de la bannier de la page -->
+                    <ui:insert>
+                        <ui:include src="/banner.xhtml" />
+                    </ui:insert>
+
+                    <p id="info" >#{ControlInfo.message}  </p>
+                    <br />
+                    <p id="messss"> #{SerializableModel.message2} </p>
+                    <br />
+                    <p id="mes"> #{tabBean.message3} </p>
+                    <br />
+
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
-                      <!-- insertion du footer de la page -->
-                     <ui:insert>
-                         <ui:include src="/footer.xhtml" />
-                     </ui:insert>
-                  
+                    <!-- insertion du footer de la page -->
+                    <ui:insert>
+                        <ui:include src="/footer.xhtml" />
+                    </ui:insert>
+
                 </p:layoutUnit>
 
                 <p:layoutUnit position="west" size="160" header="Menu" collapsible="true">
-                     <!-- insertion du menu de la page
-                     <ui:insert>
-                         <ui:include src="/menu_left.xhtml" />
-                     </ui:insert> -->
-                     
-                     <!-- formulaire du menu -->
-                     <h:form id="menu" >  
+                    <!-- insertion du menu de la page
+                    <ui:insert>
+                        <ui:include src="/menu_left.xhtml" />
+                    </ui:insert> -->
 
-                         <p:toolbar>  
-                             <p:toolbarGroup align="left"> 
-                                 <!-- Bouton d'insertion  Atomique -->
-                                 <p:commandButton value="Add Atomic Node"  update=":canvas:mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/>
-                                 <!-- Bouton d'insertion Composé -->
-                                 <p:commandButton value="Add Composed Node"  update=":canvas:mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
-                                 <!-- Bouton Suppresion -->
-                                 <p:commandButton value="Delete Selected Node"  update="mindmap" id="sup"   ajax="false"/> 
+                    <!-- formulaire du menu -->
+                    <h:form id="menu" >  
 
-                                 <p:separator />  
-                                  <!-- Bouton d'new Project -->
-                                 <p:commandButton value="New Project"  update="mindmap" id="New"   ajax="false"/>
-                                 <!-- Bouton d'Open Project -->
-                                 <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
-                                 <!-- Bouton save Project -->
-                                 <p:commandButton value="Save Project"  update="messss"  id="Savejava"  action="#{SerializableModel.Serializable( TestModel.modeltest )}" ajax="false"/> 
-                                 
-                                 
-                                 <p:separator /> 
-                                  <!-- Bouton d'Import C++ -->
-                                 <p:commandButton value="Import C++ Project"  update="mindmap" id="import"   ajax="false"/> 
-                                 <!-- Bouton Convert C++ -->
-                                 <p:commandButton value="Convert To C++"  update="mindmap" id="convert"   ajax="false"/>                                
-                                 <!-- Bouton Export PNG -->
-                                 <p:commandButton value="Export To PNG"  update="mindmap" id="export"   ajax="false"/> 
+                        <p:toolbar>  
+                            <p:toolbarGroup align="left"> 
+                                <!-- Bouton d'insertion  Atomique -->
+                                <p:commandButton value="Add Atomic Node"  update=":canvas:mindmap" id="add" action="#{mindmapBean.addListNode()}"  ajax="false"/>
+                                <!-- Bouton d'insertion Composé -->
+                                <p:commandButton value="Add Composed Node"  update=":canvas:mindmap" id="add2" action="#{mindmapBean.addListNodeCompo()}"  ajax="false"/> 
+                                <!-- Bouton Suppresion -->
+                                <p:commandButton value="Delete Selected Node"  update="mindmap" id="sup"   ajax="false"/> 
 
-                             </p:toolbarGroup>
-                         </p:toolbar> 
+                                <p:separator />  
+                                <!-- Bouton d'new Project -->
+                                <p:commandButton value="New Project"  update="mindmap" id="New"   ajax="false"/>
+                                <!-- Bouton d'Open Project -->
+                                <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
+                                <!-- Bouton save Project -->
+                                <p:commandButton value="Save Project"  update="messss"  id="Savejava"  action="#{SerializableModel.Serializable( TestModel.modeltest )}" ajax="false"/> 
 
-                     </h:form >  
+
+                                <p:separator /> 
+                                <!-- Bouton d'Import C++ -->
+                                <p:commandButton value="Import C++ Project"  update="mindmap" id="import"   ajax="false"/> 
+                                <!-- Bouton Convert C++ -->
+                                <p:commandButton value="Convert To C++"  update="mindmap" id="convert"   ajax="false"/>                                
+                                <!-- Bouton Export PNG -->
+                                <p:commandButton value="Export To PNG"  update="mindmap" id="export"   ajax="false"/> 
+
+                            </p:toolbarGroup>
+                        </p:toolbar> 
+
+                    </h:form >  
 
                 </p:layoutUnit>
 
                 <!-- Conteneur de la page -->
                 <p:layoutUnit position="center">
-             
+
 
                     <h:form id="canvas">  
 
-                     <p:growl id="growl" sticky="true" showDetail="true"/>  
-   
-
-                     <p:tab id="personal" title="Mind Map">  
-                                <p:panel header="Mind Map">
-                                    <p:mindmap  id="mindmap" value="#{mindmapBean.root}" style="width:100%;height:700px;border:0.1px solid black;cursor: pointer" >  
-                                        <p:ajax event="select" listener="#{mindmapBean.NodeSelect2}"   />  
-                                        <p:ajax event="dblselect" listener="#{tabBean.addTab}" update="tabView"  />                                                                          
-                                           <!--     oncomplete="details.show()" -->
-                                   </p:mindmap>  
-                                </p:panel>
-                            </p:tab>   
-                     
-                 <p:tabView   id="tabView" value="#{tabBean.tabs}" var="tab" >  
-                            
-                        <p:ajax event="tabClose" listener="#{tabBean.onTabClose}" update=":canvas:tabView" />
-                     
-                        <p:tab id="personal1" title="#{tab}"  closable="true">  
-                            <!-- insertion du menu de la page
-                <ui:insert>
-                    <ui:include src="/viewNode.xhtml" />
-                </ui:insert> -->
+                        <p:growl id="growl" sticky="true" showDetail="true"/>  
 
 
-                            <div style=" margin:0px; border:0px; padding: 0px;  height: 100%" >
+                        <p:tab id="personal" title="Mind Map">  
+                            <p:panel header="Mind Map">
+                                <p:mindmap  id="mindmap" value="#{mindmapBean.root}" style="width:100%;height:700px;border:0.1px solid black;cursor: pointer" >  
+                                    <p:ajax event="select" listener="#{mindmapBean.NodeSelect2}"   />  
+                                    <p:ajax event="dblselect" listener="#{tabBean.addTab}" update="tabView" />                                                                          
 
+                                </p:mindmap>  
+                            </p:panel>
+                        </p:tab>   
 
-                                <div id="inner_west" position="west" size="50%" style="  margin:0px; ">
-                                     <h:form id="formNode">    
-                                        <p:growl id="grow2" sticky="true" showDetail="true" />                     
-                                        <p:panel header="Node"    style=" margin:0px; border:0px; padding: 0px;   " closeTitle="true" >
+                        <p:tabView   id="tabView" value="#{tabBean.tabs}" var="tab" >  
+
+                            <p:ajax event="tabClose" listener="#{tabBean.onTabClose}" update=":canvas:tabView" />
+
+                            <p:tab id="personal1" title="#{tab}"  closable="true">  
+                              <!--     <ui:insert>
+                                    insertion du menu de la page 
+                                    <ui:include src="/viewNode.xhtml" />
+                                </ui:insert> -->
+                            </p:tab> 
+
+                        </p:tabView>      
+
+                    </h:form>
+                    
+                              <div id="inner_west" position="west" size="50%" style="  margin:0px; ">
+                            <h:form id="formNode">     
+                                <p:growl id="grow2" sticky="true" showDetail="true" />                         
+                                 <p:panel header="Node"    style=" margin:0px; border:0px; padding: 0px;   " closeTitle="true" >
 
                                             <p:panelGrid columns="2"  style="border-width: 0px;  padding: 0px; width: 100%;  " >
                                                 <h:outputText value="Name :" />  
@@ -135,17 +137,14 @@
                                                 <p:inputTextarea rows="5" cols="30"  maxlength="1000"  id="DescADVANCED"     
                                                                  value="#{ControlInfo.descadvance}" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
                                                 
-                                                
-                                                
-                                                
                                                 <h:outputText value="Type of integration: " /> 
-                                                
-                                                                        
+                                                                     
                                                 <p:selectOneRadio id="options"   > 
                                                    
                                                     <f:selectItem itemLabel="Continu" itemValue="continu"  />  
                                                     <f:selectItem itemLabel="Discret" itemValue="discret"  />  
                                                     <f:selectItem itemLabel="Algebraic" itemValue="algebraic"  />  
+                                                    <!-- comtrol de l'action sur la liste déroulante -->
                                                     <f:ajax listener="#{ControlInfo.choixIntegration}" event="click" execute="options" render="inttt" />
    
                                                 </p:selectOneRadio>
@@ -158,100 +157,114 @@
                                             </p:panelGrid>
                                         </p:panel>
                                       </h:form> 
-                                </div>
+                        </div>
+    
+                        <div id="inner_east" position="east" size="50%" style=" margin:0px; ">
+                           
+                            <h:form id="formDecription">
+                                <p:growl id="growl0" showDetail="true" sticky="true" />  
+                                <p:panel header="Desc parameter" style=" margin:0px; border:0px; padding: 0px;">
+                                    <p:panelGrid columns="2" style=" margin:0px; border:0px; padding: 0px; width: 100%;">
+                                        <h:outputText value="Parameter :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%;border:0px;  "/>  
+                                        <!--   Gestion du bouton pour add element -->
+                                        <!--   Gestion du bouton pour add element -->
+                        <p:commandButton id="showDialogButton1" type="button" value="Add Variable" onclick="dlg1.show();" /> 
+                                                           
+                                    <!-- pop-up demenandans le nom et la valeur -->
+                                      <p:dialog header="Enter Information" widgetVar="dlg1" resizable="false">  
+                                            <h:panelGrid columns="2" style="margin-bottom:10px">  
+                                                <h:outputLabel value="Names:" />  
+                                                <p:inputText id="Namespara" value="#{ControlInfo.namesP}"  /> 
+                                                <h:outputLabel value="Values:" />
+                                                <p:inputText id="Valuespara" value="#{ControlInfo.valP}"  />      
+                                             </h:panelGrid>  
+                                    
+                                    <p:commandButton id="showDialogButton11" value="Add Parameter" action="#{ControlInfo.addParameters(ControlInfo.namesP, ControlInfo.valP)}" update="listPara" ajax="false"/> 
+                                   </p:dialog>
 
-                                <div id="inner_east" position="east" size="50%" style=" margin:0px; ">
-                                   <h:form id="formDecription"> 
-                                        <p:growl id="grow3" sticky="true" showDetail="true" />  
-                                        <p:panel header="Desc parameter" style=" margin:0px; border:0px; padding: 0px;">
-                                            <p:panelGrid columns="2" style=" margin:0px; border:0px; padding: 0px; width: 100%;">
-                                                <h:outputText value="Parameter :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%;border:0px;  "/>  
-                                                <!--   Gestion du bouton pour add element -->
-                                                <p:commandButton id="showDialogButton1" type="button" value="Add Parameter" onclick="dlg1.show();" /> 
-                                                <!-- pop-up demenandans le nom et la valeur -->
-                                                <p:dialog header="Enter Information" widgetVar="dlg1" resizable="false">  
+                                    
+                                        <!--  Generation de la liste -->
+                                    <p:dataList id="listPara" value="#{ControlInfo.parameters}" var="para" itemType="disc">  
+                                       #{para.names} : 
+                                        <h:inputText value="#{para.values}" id="Variableetat1"/> 
+                                        <p:commandButton   update="listPara" actionListener="#{ControlInfo.delParameter(para)}" icon="ui-icon-close" > 
+                                                <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert" />  
+                                            </p:commandButton>  
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"  />  
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />       
+                                            </p:confirmDialog>
+                                    </p:dataList> 
 
-                                                    <h:panelGrid columns="2" style="margin-bottom:10px">  
-                                                        <h:outputLabel for="Namespara" value="Names:" />  
-                                                        <p:inputText id="Namespara" value="#{ControlInfo.namesP}"  /> 
-                                                        <h:outputLabel for="Valuespara" value="Values:" />
-                                                        <p:inputText id="Valuespara" value="#{ControlInfo.valP}"  />      
-                                                    </h:panelGrid>  
+                                        <br />
+                                        <h:outputText value="State Variable:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
+                                        <!--   Gestion du bouton pour add element -->
+                                    <p:commandButton id="showDialogButton" type="button" value="Add Variable" onclick="dlg.show();" /> 
+                                    <!-- pop-up demenandans le nom et la valeur -->
+                                    <p:dialog header="Enter Information" widgetVar="dlg" resizable="false"> 
+                                        
+                                            <h:panelGrid columns="2" style="margin-bottom:10px">  
+                                                <h:outputLabel for="Names" value="Names:" />  
+                                                <p:inputText id="Names" value="#{ControlInfo.namesV}"  /> 
+                                                <h:outputLabel for="Values" value="Values:" />
+                                                <p:inputText id="Values" value="#{ControlInfo.valV}"  />
+                                            </h:panelGrid>  
 
-                                                    <p:commandButton id="submitButton1" value="Submit" action="#{ControlInfo.addParameter()}" update="listPara" oncomplete="dlg1.hide();" ajax="false"/>  
+                                            <p:commandButton id="submitButton" value="Submit" update="listVar" oncomplete="dlg.hide();" actionListener="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}"/>  
+                                        
+                                    </p:dialog> 
+                                        <!--  Generation de la liste -->
+                                    <p:dataList id="listVar" value="#{ControlInfo.variables}" var="val" itemType="disc">  
+                                       #{val.names} : 
+                                        <h:inputText value="#{val.values}" id="Variableetat"/> 
 
-                                                </p:dialog> 
-                                                <!--  Generation de la liste -->
-                                                <p:dataList id="listPara" value="#{ControlInfo.parameters}" var="paraList" itemType="disc">  
-                                                    #{paraList.names} : 
-                                                    <h:inputText value="#{paraList.values}" id="Variableetat1"/> 
-                                                    <!--  gestion de la suppresion de la variable -->
-                                                    <p:commandButton   update="listPara" actionListener="#{ControlInfo.delParameter(para)}" icon="ui-icon-close" > 
-                                                        <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert" />  
-                                                    </p:commandButton>  
-                                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
-                                                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"  />  
-                                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />       
-                                                    </p:confirmDialog>                               
-                                                </p:dataList> 
+                                          <!--  gestion de la suppresion de la variable -->
+                                          <p:commandButton   update="listVar"  actionListener="#{ControlInfo.delVariables(val)}" icon="ui-icon-close" > 
+                                                <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert"  />                                             
+                                        </p:commandButton >  
+                                                
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />                                               
+                                            </p:confirmDialog>     
+                                    </p:dataList>   
+                                        <br />
+                                        <h:outputText value="Equation:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
+                                        <p:commandButton value="Add Equation"   id="addequation" action="null"  ajax="false" style="padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
+                                        <p:dataList id="listEquation" value="#{ControlInfo.equation}" var="valequation" itemType="disc">  
+                                       
+                                            <h:inputText value="#{valequation}" id="Variableetat"/> 
 
-                                                <br></br>
-                                                <h:outputText value="State Variable:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
-                                                <!--   Gestion du bouton pour add element -->
-                                                <p:commandButton id="showDialogButton2" type="button" value="Add Variable" onclick="dlg2.show();" /> 
-                                                <!-- pop-up demenandans le nom et la valeur -->
-                                                <p:dialog header="Enter Information" widgetVar="dlg" resizable="false">  
-                                                    <h:panelGrid columns="2" style="margin-bottom:10px">  
-                                                        <h:outputLabel for="Names" value="Names:" />  
-                                                        <p:inputText id="Names" value="#{ControlInfo.namesV}"  /> 
-                                                        <h:outputLabel for="Values" value="Values:" />
-                                                        <p:inputText id="Values" value="#{ControlInfo.valV}"  />
-                                                    </h:panelGrid>  
+                                          <!--  gestion de la suppresion de la variable -->
+                                          <p:commandButton   update="listEquation"  actionListener="#{ControlInfo.delEquation(valequation)}" icon="ui-icon-close" > 
+                                                <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert"  />                                             
+                                        </p:commandButton >  
+                                                
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />                                               
+                                            </p:confirmDialog>     
+                                    </p:dataList>   
+                                        
+                                        <h:outputText value="Derivees :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
+                                    <p:dataList id="listVar2" value="#{ControlInfo.variables}" var="val2" itemType="disc"  >  
+                                        <p:commandButton value="test"   id="testderivee" action="null"  ajax="false"/>
+                                        <h:inputText value="#{val2.derive}" id="deriver"/>  
+                                    </p:dataList>
+                                        <br></br>
+                                        <p:commandButton value="Input"   id="input" action="null"  ajax="false" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
+                                        <br></br>
+                                        <p:commandButton value="Output"   id="output" action="null"  ajax="false" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
 
-                                                    <p:commandButton id="submitButton2" value="Submit" update="listVar listVar2" oncomplete="dlg2.hide();" action="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}" ajax="false"/>  
-                                                </p:dialog> 
-                                                <!--  Generation de la liste -->
-                                                <p:dataList id="listVar" value="#{ControlInfo.variables}" var="val" itemType="disc">  
-                                                    #{val.names} : 
-                                                    <h:inputText value="#{val.values}" id="Variableetat"/> 
-
-                                                    <!--  gestion de la suppresion de la variable -->
-                                                    <p:commandButton   update="listVar"  actionListener="#{ControlInfo.delVariables(val)}" icon="ui-icon-close" > 
-                                                        <p:confirm header="Confirmation" message="Are you sure delete?" icon="ui-icon-alert"  />                                             
-                                                    </p:commandButton >  
-
-                                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
-                                                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
-                                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />                                               
-                                                    </p:confirmDialog>     
-                                                </p:dataList>   
-                                                <br></br>
-                                                <h:outputText value="Equation:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
-                                                <p:commandButton value="Test"   id="testequation" action="null"  ajax="false" style="padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
-                                                <h:inputText value="ttt" id="equation" style="padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
-                                                <br></br>
-                                                <h:outputText value="Derivees :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>  
-                                                <p:dataList id="listVar2" value="#{ControlInfo.variables}" var="val2" itemType="disc"  >  
-                                                    <p:commandButton value="test"   id="testderivee" action="null"  ajax="false"/>
-                                                    <h:inputText value="#{val2.derive}" id="deriver"/>  
-                                                </p:dataList>
-                                                <br></br>
-                                                <p:commandButton value="Input"   id="input" action="null"  ajax="false" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
-                                                <br></br>
-                                                <p:commandButton value="Output"   id="output" action="null"  ajax="false" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
-
-                                            </p:panelGrid>
-                                        </p:panel>
-                                    </h:form> 
-                                </div>      
-                            </div>
-                        </p:tab> 
-                         
-
-                 </p:tabView>      
-                  
+                                        
+                                    </p:panelGrid>
+                                </p:panel>
+                               
                                 
-                   </h:form>   
+                           </h:form>
+
+                  </div>   
+
                 </p:layoutUnit>
             </p:layout>
         </h:body>

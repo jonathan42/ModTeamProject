@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 
@@ -45,13 +46,15 @@ public class ControlInfo implements Serializable{
     private List<String> Integrator2;
     private List<String> Integrator3;
     private List<String> Integrator;
+    private List<String> Equation;
+
 
     private String radioV = "continu";
     //
-    private List<Parameter> Parameters ;
-    private String NamesP =null;
-    private String ValP=null;
-    
+    private List<Parameter> Parameters  ;
+    private String NamesP ;
+    private String ValP;
+     
     private List<Variable> variables;
     private String NamesV;
     private String ValV;
@@ -84,19 +87,32 @@ public class ControlInfo implements Serializable{
          Integrator3 = new ArrayList<String>();
          Integrator3.add("NONE"); 	 	
          Integrator3.add("AE"); 
-         //TypeIntegrator = new ArrayList<String>();
+         
+         
+         Equation= new ArrayList<String>();
+         Equation.add("mon equation");
         // TypeIntegrator.add("Discret");
         // TypeIntegrator.add("Continu");
          
          
          Parameters = new ArrayList<Parameter>();
-    
+         //message += "ajout param || ";
+         //Parameters.add(new Parameter("toto",  Double.parseDouble("132"))); 
+         // message += "ajout fin param  ||";
+          
+          //message += " addparam  ||";
+          //this.addParameter();
+          //message += " fin addparam  ||";
+         
          variables = new ArrayList<Variable>();
 
                
     }
  
-
+/**
+ * fonction qui change la liste déroulante  avec le bouton radio
+ * @param event 
+ */
     public void choixIntegration(AjaxBehaviorEvent event){
                    
        //  message += "dans de l'integration ||";
@@ -125,27 +141,42 @@ public class ControlInfo implements Serializable{
          
     
             
-    public void addParameter(){      
-        message += "ajout de parameter ||";
-         Parameters.add(new Parameter(NamesP,  Double.parseDouble(ValP))); 
-         message += "fin add ||";
-    }
-    
-   /* public void addParameter(String names ,String val){ 
+   public void addParameter(){ 
+        //message += "ajout de parameter ||";
+         Parameters.add(new Parameter("titi",  Double.parseDouble("132"))); 
+        //message += "fin add ||";
+    } 
+   
+   public void addEquation(){ 
+        //message += "ajout de parameter ||";
+         Equation.add("new equation"); 
+        //message += "fin add ||";
+    } 
+    public void delEquation(Object o){
+          message += "supprimer un para ||";
+        boolean val;
+        val=Equation.remove(o);
+         o = null;
+           message += "fin supp para ||";
+    }  
+   
+   
+  public void addParameters(String names ,String val){ 
         
-        message += "ajout de parameter ||";
+        message += "ajout de parameter 2 para ||";
          Parameters.add(new Parameter(names, Double.parseDouble(val))); 
          NamesP=null;
          ValP=null;
          
-         message += "fin add ||";
-    }*/
+         message += "fin add 2 para||";
+    }
     
     public void delParameter(Object o){
-        
+          message += "supprimer un para ||";
         boolean val;
         val=Parameters.remove(o);
          o = null;
+           message += "fin supp para ||";
     }
     
     
@@ -237,6 +268,14 @@ public class ControlInfo implements Serializable{
 
     public void setDescadvance(String descadvance) {
         this.descadvance = descadvance;
+    }
+
+    public List<String> getEquation() {
+        return Equation;
+    }
+
+    public void setEquation(List<String> Equation) {
+        this.Equation = Equation;
     }
 
     
