@@ -14,6 +14,8 @@ public class Parameter implements Serializable {
     
     private String Names;
     private Double Values;
+    private boolean input;
+    private boolean output;
 
     public Parameter(String Names, Double Values) {
         this.Names = Names;
@@ -34,6 +36,22 @@ public class Parameter implements Serializable {
 
     public void setValues(Double Values) {
         this.Values = Values;
+    }
+
+    public boolean isInput() {
+        return input;
+    }
+
+    public boolean isOutput() {
+        return output;
+    }
+
+    public void setInput(boolean input) {
+        this.input = input;
+    }
+
+    public void setOutput(boolean output) {
+        this.output = output;
     }
     
     
