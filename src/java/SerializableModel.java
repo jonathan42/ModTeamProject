@@ -41,8 +41,8 @@ public class SerializableModel implements Serializable {
     }
     
     // permet de désérialiser un objet
-    public static void Deserializable() {
-
+    public  void Deserializable() {
+         message2 += "debut deserialisable  <br />";
         try {
             FileInputStream fichier = new FileInputStream("model_ser.save");
             ObjectInputStream ois = new ObjectInputStream(fichier);
@@ -55,6 +55,7 @@ public class SerializableModel implements Serializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+         message2 += "fin Deserialisable  <br />";
        // return model;
     }
 

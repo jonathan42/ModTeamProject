@@ -29,13 +29,19 @@ public class MindMapBean implements Serializable {
     private GlobalModel modeltest; 
     
     
+    private NodeModel modelnode;
+    
+    
     public MindMapBean() {
+      
+      
         
       List<MindmapNode> List = null ;
       List = newlistNode();
+      //List = getListNoeud();
         
-      for (int i = 1; i <ListNoeud.size(); i++){
-            root.addNode(ListNoeud.get(i));
+      for (int i = 1; i < List.size(); i++){
+            root.addNode(List.get(i));
         }
       selectedNode = tmpNode = root;
       
@@ -52,12 +58,12 @@ public class MindMapBean implements Serializable {
     public void SaveModel(){
         
         // creation de la list 
-        List<NewModel> listsave = new ArrayList<NewModel>();
+        List<NodeModel> listsave = new ArrayList<NodeModel>();
         
         // parcours de la list de node
          for (int i = 1; i <ListNoeud.size(); i++){
              // ajout les node model dans le model global
-            listsave.add((NewModel) ListNoeud.get(i).getData());
+            listsave.add((NodeModel) ListNoeud.get(i).getData());
         }
         modeltest.setModel(null);
         
@@ -65,26 +71,26 @@ public class MindMapBean implements Serializable {
   
     public List<MindmapNode> newlistNode(){
         // geneartion noeud racine
-        NewModel test = new NewModel(true, "root", label, root, label, label, label, null, null, "FFCC00");
+        NodeModel test = new NodeModel(true, "root", label, root, label, label, label, null, null, "FFCC00");
         root = new DefaultMindmapNode(test.name, test, test.color, false);  
         
         // geneartion  élémént
-        NewModel test2 = new NewModel(true, "IPs", label, root, label, label, label, null, null, "FFCC00");
+        NodeModel test2 = new NodeModel(true, "IPs", label, root, label, label, label, null, null, "FFCC00");
         MindmapNode ips = new DefaultMindmapNode(test2.name, test2, test2.color, true);  
         
-        NewModel test3 = new NewModel(true, "NS(s)", label, root, label, label, label, null, null, "FFCC00");
+        NodeModel test3 = new NodeModel(true, "NS(s)", label, root, label, label, label, null, null, "FFCC00");
         MindmapNode ns = new DefaultMindmapNode(test3.name, test3, test3.color, true); 
         
-        NewModel test4 = new NewModel(true, "Malware", label, root, label, label, label, null, null, "6e9ebf");
+        NodeModel test4 = new NodeModel(true, "Malware", label, root, label, label, label, null, null, "6e9ebf");
         MindmapNode malware = new DefaultMindmapNode(test4.name, test4, test4.color, true); 
         
-        NewModel test5 = new NewModel(true, "Virus", label, root, label, label, label, null, null, "6e9ebf");
+        NodeModel test5 = new NodeModel(true, "Virus", label, root, label, label, label, null, null, "6e9ebf");
         MindmapNode malwa = new DefaultMindmapNode(test5.name, test5, test5.color , true); 
         
-        NewModel test6 = new NewModel(true, "Toto", label, root, label, label, label, null, null, "FFCC00");
+        NodeModel test6 = new NodeModel(true, "Toto", label, root, label, label, label, null, null, "FFCC00");
         MindmapNode malwar = new DefaultMindmapNode(test6.name, test6, test6.color, true); 
         
-        NewModel test7 = new NewModel(true, "Titi", label, root, label, label, label, null, null, "6e9ebf");
+        NodeModel test7 = new NodeModel(true, "Titi", label, root, label, label, label, null, null, "6e9ebf");
         MindmapNode malwarr = new DefaultMindmapNode(test7.name, test7, test7.color, true);
          
         
@@ -102,10 +108,18 @@ public class MindMapBean implements Serializable {
         return ListNoeud;
     }
     
+    public void CréationDuMindmap(){
+        
+        for( int i=1; i <modeltest.getModel().size() ;i ++){
+               NodeModel tmp = modeltest.getModel().get(i);
+               ListNoeud.get(i);
+               MindmapNode test = new DefaultMindmapNode(tmp.name, tmp, tmp.color, true);
+                }
+    }
     
     public void newModel(){
         // geneartion noeud racine
-        NewModel test = new NewModel(true, "root", label, root, label, label, label, null, null, "FFCC00");
+        NodeModel test = new NodeModel(true, "root", label, root, label, label, label, null, null, "FFCC00");
         root = new DefaultMindmapNode(test.name, test, test.color, false); 
          ListNoeud =null;
         ListNoeud = new ArrayList<MindmapNode>();
@@ -115,7 +129,7 @@ public class MindMapBean implements Serializable {
     
     public void addListNode() {
         
-        NewModel test = new NewModel(true);
+        NodeModel test = new NodeModel(true);
         MindmapNode tmp = new DefaultMindmapNode(label, test, "6e9ebf", true);
         test.father = tmp ;
         tmpNode.addNode(tmp);       
@@ -171,13 +185,15 @@ public class MindMapBean implements Serializable {
      */
     public MindmapNode NodeSelect(SelectEvent event) {  
         MindmapNode node = (MindmapNode) event.getObject();  
-          tmpNode =node;
+          tmpNode = node;
+          modelnode = (NodeModel) node.getData();
        return node;
         }
      
      public void NodeSelect2(SelectEvent event) {  
         DefaultMindmapNode node = (DefaultMindmapNode) event.getObject();  
           tmpNode =node;
+            modelnode = (NodeModel) node.getData();
           // modif couleur
          // node.setFill("6ebf8f");
    
@@ -215,6 +231,22 @@ public class MindMapBean implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public GlobalModel getModeltest() {
+        return modeltest;
+    }
+
+    public NodeModel getModelnode() {
+        return modelnode;
+    }
+
+    public void setModeltest(GlobalModel modeltest) {
+        this.modeltest = modeltest;
+    }
+
+    public void setModelnode(NodeModel modelnode) {
+        this.modelnode = modelnode;
     }
  
     

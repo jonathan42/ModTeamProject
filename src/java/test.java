@@ -2,17 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.model.mindmap.MindmapNode;
 import org.primefaces.model.mindmap.DefaultMindmapNode;  
 import org.primefaces.model.mindmap.MindmapNode; 
 
@@ -37,8 +31,13 @@ public class test implements Serializable{
       
         private MindmapNode selectedNode ;
         private List<MindmapNode> ListNoeud; 
-        private List<NewModel> Model;
+        
+        private List<NodeModel> Model;
         private MindmapNode tmpNode;
+        
+        
+        private List<NodeModel> Modelson;
+    
       
         private String label;
     
@@ -118,23 +117,23 @@ public class test implements Serializable{
                  List<Variable> variables)
         */
         // geneartion noeud racine
-        NewModel test11 = new NewModel(false, "Tete", "Root test", null, "cuicui", "M2SL_RK4", "Discret", Parameters1, Variables1, "FFCC00");
+        NodeModel test11 = new NodeModel(false, "Tete", "Root test", null, "cuicui", "M2SL_RK4", "Discret", Parameters1, Variables1, "FFCC00");
         root = new DefaultMindmapNode(test11.name, test11, test11.color, false);  
         
         // geneartion  élémént
-        NewModel test12 = new NewModel(false, "Corps", "blazblzefpqhpfquv hqph qg fpq", root, "Niark", "Discret", "RKCK", Parameters2, Variables2, "FFCC00");
+        NodeModel test12 = new NodeModel(false, "Corps", "blazblzefpqhpfquv hqph qg fpq", root, "Niark", "Discret", "RKCK", Parameters2, Variables2, "FFCC00");
         MindmapNode Corps = new DefaultMindmapNode(test12.name, test12, test12.color, true);  
         
-        NewModel test13 = new NewModel(true, "Coeur", "vqiohgçq_ ushqipfh qgf gq efg qpg efgqi gqdg fpg", Corps, "Blup", "Discret", "RK4IMP", Parameters3, Variables3, "FFCC00");
+        NodeModel test13 = new NodeModel(true, "Coeur", "vqiohgçq_ ushqipfh qgf gq efg qpg efgqi gqdg fpg", Corps, "Blup", "Discret", "RK4IMP", Parameters3, Variables3, "FFCC00");
         MindmapNode Coeur = new DefaultMindmapNode(test13.name, test13, test13.color, true); 
         
-        NewModel test14 = new NewModel(true, "Bras", "quidf qgusfp qiuef qusgdfiqgf ipqg qsf ", Corps, "Schtroumpf", "Discret", "GEAR1", Parameters4, Variables4, "6e9ebf");
+        NodeModel test14 = new NodeModel(true, "Bras", "quidf qgusfp qiuef qusgdfiqgf ipqg qsf ", Corps, "Schtroumpf", "Discret", "GEAR1", Parameters4, Variables4, "6e9ebf");
         MindmapNode Bras = new DefaultMindmapNode(test14.name, test14, test14.color, true); 
         
-        NewModel test15 = new NewModel(true, "Jambes", "hfubduiqg fjhfjd bdichn dnix npqm qhdfqh qshf pquigf q fgqe  qsg q", Corps, "Plip", "Continu", "EULER", Parameters5, Variables5, "6e9ebf");
+        NodeModel test15 = new NodeModel(true, "Jambes", "hfubduiqg fjhfjd bdichn dnix npqm qhdfqh qshf pquigf q fgqe  qsg q", Corps, "Plip", "Continu", "EULER", Parameters5, Variables5, "6e9ebf");
         MindmapNode Jambes = new DefaultMindmapNode(test15.name, test15, test15.color , true);   
         
-        List<NewModel> Model = new ArrayList<NewModel>();
+        List<NodeModel> Model = new ArrayList<NodeModel>();
         
         Model.add(test11);
         Model.add(test12);
@@ -143,9 +142,16 @@ public class test implements Serializable{
         Model.add(test15);
         
         modeltest= new GlobalModel(Model);
+        
+        ListNoeud = new ArrayList<MindmapNode>();
+        ListNoeud.add(root);
+        ListNoeud.add(Corps);
+        ListNoeud.add(Coeur);
+        ListNoeud.add(Bras);
+        ListNoeud.add(Jambes);
     }
 
-    public List<NewModel> getModel() {
+    public List<NodeModel> getModel() {
         return Model;
     }
 
@@ -153,12 +159,20 @@ public class test implements Serializable{
         return modeltest;
     }
 
-    public void setModel(List<NewModel> Model) {
+    public void setModel(List<NodeModel> Model) {
         this.Model = Model;
     }
 
     public void setModeltest(GlobalModel modeltest) {
         this.modeltest = modeltest;
+    }
+
+    public List<MindmapNode> getListNoeud() {
+        return ListNoeud;
+    }
+
+    public void setListNoeud(List<MindmapNode> ListNoeud) {
+        this.ListNoeud = ListNoeud;
     }
 
         

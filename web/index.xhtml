@@ -63,7 +63,7 @@
                                 <!-- Bouton d'new Project -->
                                 <p:commandButton value="New Project"  update="mindmap" id="New"   ajax="false"/>
                                 <!-- Bouton d'Open Project -->
-                                <p:commandButton value="Open Project"  update="mindmap" id="open"   ajax="false"/> 
+                                <p:commandButton value="Open Project"  update="mindmap" id="open"  action="#{SerializableModel.Deserializable()}" ajax="false"/> 
                                 <!-- Bouton save Project -->
                                 <p:commandButton value="Save Project"  update="messss"  id="Savejava"  action="#{SerializableModel.Serializable( TestModel.modeltest )}" ajax="false"/> 
 
@@ -96,9 +96,10 @@
                             <p:panel header="Mind Map">
                                 <p:mindmap  id="mindmap" value="#{mindmapBean.root}" style="width:100%;height:700px;border:0.1px solid black;cursor: pointer" >  
                                     <p:ajax event="select" listener="#{mindmapBean.NodeSelect2}"   />  
-                                    <p:ajax event="dblselect" listener="#{tabBean.addTab}"  />                                                                          
-
-                                </p:mindmap>  
+                                    <p:ajax  event="dblselect" listener="#{mindmapBean.NodeSelect}"  />                                                                        
+                                    
+                                </p:mindmap> 
+                                
                             </p:panel>
                         </p:tab>   
 
@@ -116,7 +117,10 @@
                         </p:tabView>     --> 
 
                     </h:form>
-                    <p:outputPanel  id="Node"> 
+                    
+
+                    <p:outputPanel  id="Node" autoUpdate="true"> 
+                      
                       <h:form id="formNode">
                          <div id="inner_west" position="west" size="50%" style="  margin:0px; ">
                          
@@ -127,25 +131,25 @@
                                                 <h:head>  
                                                     <center> <b> <h:outputText value="Name :" style="text-align: center"/></b> <p:button icon="ui-icon-help" onclick=""/></center>
                                                  </h:head>
-                                                <h:inputText  value="#{ControlInfo.name}" id="Nom" size="20" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; " /> 
-                                                
+                                         <h:inputText  value="#{mindmapBean.tmpNode.label}" id="Nom" size="20" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1% " /> 
+                                                 
                                                  <h:head> 
                                                 <center> <b> <h:outputText value="Description:" />  </b> <p:button icon="ui-icon-help" onclick=""/> </center>
                                                 </h:head>
                                                 <p:inputTextarea rows="5" cols="30"  maxlength="100"  id="DescSIMPLE"     
-                                                                 value="#{ControlInfo.desc}" autoResize="true" style=" background: #ffffff; padding:0px;min-width: 98%; margin-left: 1%; margin-right: 1%    " />  
+                                                                 value="#{mindmapBean.modelnode.description}" autoResize="true" style=" background: #ffffff; padding:0px;min-width: 98%; margin-left: 1%; margin-right: 1%    " />  
                                                
                                                 <h:head>
                                                 <center> <b> <h:outputText value="Father:" />   </b> <p:button icon="ui-icon-help" onclick=""/>  </center>
                                                 </h:head>
-                                                <h:inputText value="parent" id="pere" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%  "/>  
+                                                <h:inputText value="#{mindmapBean.tmpNode.parent}" id="pere" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%  "/>  
                                                
 
                                                 <h:head>
                                                 <center> <b> <h:outputText value="Advanced Description :" />  </b> <p:button icon="ui-icon-help" onclick=""/> </center>
                                                 </h:head>
                                                 <p:inputTextarea rows="5" cols="30"  maxlength="1000"  id="DescADVANCED"     
-                                                                 value="#{ControlInfo.descadvance}" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
+                                                                 value="#{mindmapBean.modelnode.advanced_desc}" autoResize="true" style=" padding:0px; background: #ffffff; min-width: 98%; margin-left: 1%; margin-right: 1%   " />
                                                 
                                                 <h:head>
                                                 <center> <b> <h:outputText value="Type of integration: " />  </b>  <p:button icon="ui-icon-help" onclick=""/> </center>                                            
@@ -179,11 +183,11 @@
                                 <p:panel header="Desc parameter" style=" margin:0px; border:0px; padding: 0px;">
                                     <p:panelGrid columns="2" style=" margin:0px; border:0px; padding: 0px; width: 100%;">
                                         <h:head>
-                                        <center> <b>
+                                         <b>
                                         <h:outputText value="Parameter :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%;border:0px;  "/> 
-                                        </b><p:button icon="ui-icon-help" onclick=""/></center></h:head>
-                                        <!--   Gestion du bouton pour add element -->
-                                        <!--   Gestion du bouton pour add element -->
+                                        </b><p:button icon="ui-icon-help" onclick="" />
+                                        </h:head>
+                                        <!--   Gestion du bouton pour add element -->  
                                     <p:commandButton id="showDialogButton1" type="button" value="Add Variable" onclick="dlg1.show();" /> 
                                                            
                                     <!-- pop-up demenandans le nom et la valeur -->
@@ -194,11 +198,10 @@
                                                 <h:outputLabel value="Values:" />
                                                 <p:inputText id="Valuespara" value="#{ControlInfo.valP}"  />      
                                              </h:panelGrid> 
-                                           <p:selectOneRadio id="optionsInputOutput"   > 
-                                                   
+                                           <p:selectManyCheckbox id="optionsInputOutput"   >              
                                                     <f:selectItem itemLabel="Input" itemValue="Input"  />  
                                                     <f:selectItem itemLabel="Output" itemValue="Output"  />  
-                                           </p:selectOneRadio>
+                                           </p:selectManyCheckbox>
                                     
                                     <p:commandButton id="showDialogButton11" value="Add Parameter" action="#{ControlInfo.addParameters(ControlInfo.namesP, ControlInfo.valP)}" update="listPara" ajax="false"/> 
                                    </p:dialog>
@@ -219,9 +222,10 @@
 
                                         <br />
                                         <h:head>
-                                        <center> <b>
+                                         <b>
                                         <h:outputText value="State Variable:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/> 
-                                            </b><p:button icon="ui-icon-help" onclick=""/></center></h:head>
+                                            </b><p:button icon="ui-icon-help" onclick=""/>
+                                        </h:head>
                                         <!--   Gestion du bouton pour add element -->
                                     <p:commandButton id="showDialogButton" type="button" value="Add Variable" onclick="dlg.show();" /> 
                                     <!-- pop-up demenandans le nom et la valeur -->
@@ -233,11 +237,11 @@
                                                 <h:outputLabel for="Values" value="Values:" />
                                                 <p:inputText id="Values" value="#{ControlInfo.valV}"  />
                                             </h:panelGrid>  
-                                            <p:selectOneRadio id="optionsInputOutput2"   > 
+                                            <p:selectManyCheckbox id="optionsInputOutput2"   > 
                                                    
                                                     <f:selectItem itemLabel="Input" itemValue="Input"  />  
                                                     <f:selectItem itemLabel="Output" itemValue="Output"  />  
-                                           </p:selectOneRadio>
+                                           </p:selectManyCheckbox>
                                             <p:commandButton id="submitButton" value="Submit" update="listVar  listVar2" oncomplete="dlg.hide();" actionListener="#{ControlInfo.addVariables(ControlInfo.namesV, ControlInfo.valV)}"/>  
                                         
                                     </p:dialog> 
@@ -258,9 +262,9 @@
                                     </p:dataList>   
                                         <br />
                                         <h:head>
-                                        <center> <b>
+                                        <b>
                                         <h:outputText value="Equation:" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
-                                        </b> <p:button icon="ui-icon-help" onclick=""/></center> 
+                                        </b> <p:button icon="ui-icon-help" onclick=""/>
                                         </h:head>
                                         <p:commandButton value="Add Equation"   id="addequation" action="#{ControlInfo.addEquation()}"  ajax="false" style="padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/>
                                         <p:dataList id="listEquation" value="#{ControlInfo.equation}" var="valequation" itemType="disc">  
@@ -275,13 +279,14 @@
                                             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
                                                 <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
                                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />                                               
-                                            </p:confirmDialog>     
+                                            </p:confirmDialog> 
+                                         <p:commandButton value="test"   id="testequation" action="null"  ajax="false"/>
                                     </p:dataList>   
                                          <br />
                                           <h:head>
-                                        <center> <b>
+                                         <b>
                                         <h:outputText value="Derivees :" style=" padding:0px; min-width: 98%; margin-left: 1%; margin-right: 1%; "/> 
-                                         </b> <p:button icon="ui-icon-help" onclick=""/></center> 
+                                         </b> <p:button icon="ui-icon-help" onclick=""/>
                                           </h:head>
                                     <p:dataList id="listVar2" value="#{ControlInfo.variables}" var="val2" itemType="disc"  >  
                                         <p:commandButton value="test"   id="testderivee" action="null"  ajax="false"/>

@@ -14,7 +14,7 @@ import org.primefaces.model.mindmap.MindmapNode;
  *
  * @author jonathan
  */
-public class NewModel implements Serializable {
+public class NodeModel implements Serializable {
     
      
     
@@ -22,11 +22,12 @@ public class NewModel implements Serializable {
     
     public String name;
     public String Description;
+    
     public MindmapNode father;
     public List<MindmapNode> sons;
     
-    public NewModel fatherNode;
-    public List<NewModel> sonsNode;
+    public NodeModel fatherNode;
+    public List<NodeModel> sonsNode;
     
     public String advanced_desc;
     public String integration_type;
@@ -38,13 +39,13 @@ public class NewModel implements Serializable {
     //list Variable (name value derive)
     private List<Variable> variables;
 
-    public NewModel(boolean atomic) {
+    public NodeModel(boolean atomic) {
         this.atomic = atomic;
     }
 
     // construction V1 mais pas avec les ellements correct
     
-    public NewModel(boolean atomic, String name, String Description, MindmapNode father, String advanced_desc, String integration_type, String integration, List<Parameter> Parameters, List<Variable> variables, String color) {
+    public NodeModel(boolean atomic, String name, String Description, MindmapNode father, String advanced_desc, String integration_type, String integration, List<Parameter> Parameters, List<Variable> variables, String color) {
         this.atomic = atomic;
         this.name = name;
         this.Description = Description;
@@ -71,7 +72,7 @@ public class NewModel implements Serializable {
      * @param Parameters
      * @param variables 
      */    
-    public NewModel(boolean atomic, String name, String Description, NewModel fatherNode, List<NewModel> sonsNode, String advanced_desc, String integration_type, String integration, String color, List<Parameter> Parameters, List<Variable> variables) {
+    public NodeModel(boolean atomic, String name, String Description, NodeModel fatherNode, List<NodeModel> sonsNode, String advanced_desc, String integration_type, String integration, String color, List<Parameter> Parameters, List<Variable> variables) {
         this.atomic = atomic;
         this.name = name;
         this.Description = Description;

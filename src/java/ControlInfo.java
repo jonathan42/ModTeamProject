@@ -29,10 +29,6 @@ import org.primefaces.event.SelectEvent;
 public class ControlInfo implements Serializable{
     
     
-    private String Integrator1V;
-    private String Integrator2V;
-    private String TypeIntegratorV;
-    private String IntegratorV;
 
     private String message = "";
 
@@ -140,12 +136,16 @@ public class ControlInfo implements Serializable{
        }
          
     
-            
-   public void addParameter(){ 
+   /**
+    * fonction de test
+    */         
+   /*public void addParameter(){ 
         //message += "ajout de parameter ||";
          Parameters.add(new Parameter("titi",  Double.parseDouble("132"))); 
         //message += "fin add ||";
     } 
+   
+   */
    
    public void addEquation(){ 
         //message += "ajout de parameter ||";
@@ -153,36 +153,38 @@ public class ControlInfo implements Serializable{
         //message += "fin add ||";
     } 
     public void delEquation(Object o){
-          message += "supprimer un para ||";
+        //  message += "supprimer un para ||";
         boolean val;
         val=Equation.remove(o);
          o = null;
-           message += "fin supp para ||";
+        //   message += "fin supp para ||";
     }  
    
    
   public void addParameters(String names ,String val){ 
         
-        message += "ajout de parameter 2 para ||";
+       // message += "ajout de parameter 2 para ||";
          Parameters.add(new Parameter(names, Double.parseDouble(val))); 
          NamesP=null;
          ValP=null;
          
-         message += "fin add 2 para||";
+         //message += "fin add 2 para||";
     }
     
     public void delParameter(Object o){
-          message += "supprimer un para ||";
+          //message += "supprimer un para ||";
         boolean val;
         val=Parameters.remove(o);
          o = null;
-           message += "fin supp para ||";
+          // message += "fin supp para ||";
     }
     
-    
-    public void addVariables(){      
+    /**
+     * fonction de test
+     */ 
+   /* public void addVariables(){      
          variables.add(new Variable("para5", (double)105)); 
-    }
+    }*/
     
     
     public void addVariables(String names ,String val){ 
@@ -204,8 +206,8 @@ public class ControlInfo implements Serializable{
         
     }
     
-    public NewModel saveNode (){ 
-        NewModel mode = new NewModel(true);
+    public NodeModel saveNode (){ 
+        NodeModel mode = new NodeModel(true);
         
         //mode.name =;
         //mode.Description = ;
@@ -226,17 +228,7 @@ public class ControlInfo implements Serializable{
     } 
     
     
-    public List<String> getIntegrator1() {
-        return Integrator1;
-    }
 
-    public List<String> getIntegrator2() {
-        return Integrator2;
-    }
-
-    public List<String> getIntegrator3() {
-        return Integrator3;
-    }
 
     public List<String> getIntegrator() {
         return Integrator;
@@ -278,19 +270,6 @@ public class ControlInfo implements Serializable{
         this.Equation = Equation;
     }
 
-    
-    
-    public void setIntegrator1(List<String> Integrator1) {
-        this.Integrator1 = Integrator1;
-    }
-
-    public void setIntegrator2(List<String> Integrator2) {
-        this.Integrator2 = Integrator2;
-    }
-
-    public void setIntegrator3(List<String> Integrator3) {
-        this.Integrator3 = Integrator3;
-    }
 
     public List<Variable> getVariables() {
         return variables;
@@ -327,38 +306,6 @@ public class ControlInfo implements Serializable{
         this.Parameters = Parameters;
     }
 
-    public String getIntegrator1V() {
-        return Integrator1V;
-    }
-
-    public String getIntegrator2V() {
-        return Integrator2V;
-    }
-
-    public String getTypeIntegratorV() {
-        return TypeIntegratorV;
-    }
-
-    public String getIntegratorV() {
-        return IntegratorV;
-    }
-
-    public void setIntegrator1V(String Integrator1V) {
-        this.Integrator1V = Integrator1V;
-    }
-
-    public void setIntegrator2V(String Integrator2V) {
-        this.Integrator2V = Integrator2V;
-    }
-
-    public void setTypeIntegratorV(String TypeIntegratorV) {
-        this.TypeIntegratorV = TypeIntegratorV;
-    }
-
-    public void setIntegratorV(String IntegratorV) {
-        this.IntegratorV = IntegratorV;
-    }
-
     public String getNamesP() {
         return NamesP;
     }
@@ -388,20 +335,7 @@ public class ControlInfo implements Serializable{
     
     
     
-    ///////////////////////////////////////////////////////////////////////////
-    public void deleteWorld(ActionEvent actionEvent){  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "System Error",  "Please try again later.");  
-          
-        FacesContext.getCurrentInstance().addMessage(null, message);  
-    }  
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
     
     
     

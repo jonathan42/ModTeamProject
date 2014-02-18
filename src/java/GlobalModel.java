@@ -13,17 +13,17 @@ import java.util.List;
  */
 public class GlobalModel implements Serializable{
     
-    private List<NewModel> Model;
+    private List<NodeModel> Model;
 
-    public GlobalModel(List<NewModel> Model) {
+    public GlobalModel(List<NodeModel> Model) {
         this.Model = Model;
     }
 
-    public List<NewModel> getModel() {
+    public List<NodeModel> getModel() {
         return Model;
     }
 
-    public void setModel(List<NewModel> Model) {
+    public void setModel(List<NodeModel> Model) {
         this.Model = Model;
     }
     
